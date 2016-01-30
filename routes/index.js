@@ -6,6 +6,8 @@ var jwt = require('express-jwt');
 
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
+var Animation = mongoose.model('Animation');
+var option = mongoose.model('Option'); 
 var User = mongoose.model('User');
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
