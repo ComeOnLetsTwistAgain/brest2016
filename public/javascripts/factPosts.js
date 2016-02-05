@@ -1,72 +1,4 @@
-angular.module('brest.factories', [])
-
-.factory('auth', ['$http', '$window',
-function($http, $window) {
-	var auth = {};
-
-	auth.saveToken = function(token) {
-		$window.localStorage['brest-token'] = token;
-	};
-
-	auth.getToken = function() {
-		return $window.localStorage['brest-token'];
-	}
-
-	auth.isAdmin = function() {
-		if(auth.currentUser() == 'admin'){
-			return true;
-		} return false;
-	}
-
-	auth.isLoggedIn = function() {
-		var token = auth.getToken();
-
-		if (token) {
-			var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-			return payload.exp > Date.now() / 1000;
-		} else {
-			return false;
-		}
-	};
-
-	auth.currentUser = function() {
-		if (auth.isLoggedIn()) {
-			var token = auth.getToken();
-			var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-			return payload.username;
-		}
-	};
-
-	auth.register = function(user) {
-		return $http.post('/register', user).success(function(data) {
-			auth.saveToken(data.token);
-		});
-	};
-
-	auth.logIn = function(user) {
-		return $http.post('/login', user).success(function(data) {
-			auth.saveToken(data.token);
-		});
-	};
-
-	auth.logOut = function() {
-		$window.localStorage.removeItem('brest-token');
-	};
-
-	return auth;
-}])
-
-.factory('animations', ['$http', 'auth', function($http, auth){
-	var animations = {};
-
-	/*Methodes*/
-
-	/*end methodes*/
-
-	return animations;
-}])
+angular.module('brest.factPosts', [])
 
 .factory('posts', ['$http', 'auth',
 function($http, auth) {
@@ -141,4 +73,6 @@ function($http, auth) {
 	  });
 	};	
 	return o;
-}]);
+}])
+
+;
