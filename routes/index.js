@@ -178,5 +178,130 @@ router.post('/login', function(req, res, next){
 
 // #######################################################
 
+/* 
+* ANIMATIONS 
+*/
 
+// paramètre pour animation
+router.param('animation', function(req, res, next, id) {
+  var query = Animation.findById(id);
+
+  query.exec(function (err, animation){
+    if (err) { return next(err); }
+    if (!animation) { return next(new Error("can't find animation")); }
+
+    req.animation = animation;
+    return next();
+  });
+});
+
+// route pour l'ensemble des animations
+router.get('/animations', function(req, res, next) {
+  Animation.find(function(err, animations){
+    if(err){ 
+      return next(err);
+    }
+
+    res.json(animations);
+  });
+});
+
+// route pour la création d'une animation
+router.post('/animations', auth, function(req, res, next) {
+  var animation = new Animation(req.body);
+
+  animation.save(function(err, animation){
+    if(err){ return next(err); }
+
+    res.json(animation);
+  });
+});
+
+
+// #######################################################
+
+/* 
+* RESERVATION
+*/
+
+// paramètre réservation
+router.param('reservation', function(req, res, next, id) {
+  var query = Reservation.findById(id);
+
+  query.exec(function (err, reservation){
+    if (err) { return next(err); }
+    if (!reservation) { return next(new Error("can't find reservation")); }
+
+    req.reservation = reservation;
+    return next();
+  });
+});
+
+// route pour l'ensemble des réservations
+router.get('/reservations', function(req, res, next) {
+  Animation.find(function(err, reservations){
+    if(err){ 
+      return next(err);
+    }
+
+    res.json(reservations);
+  });
+});
+
+
+// route pour la création d'une réservation 
+router.post('/animations', auth, function(req, res, next) {
+  var animation = new Animation(req.body);
+
+  animation.save(function(err, reservations){
+    if(err){ return next(err); }
+
+    res.json(reservations);
+  });
+});
+
+// #######################################################
+
+/* 
+* OPTION
+*/
+
+// parametre option
+router.param('option', function(req, res, next, id) {
+  // var query = Reservation.findById(id);
+  var query = Option.findById(id); // TODO: coloration en bleu de option normale ?? 
+
+  query.exec(function (err, option){
+    if (err) { return next(err); }
+    if (!option) { return next(new Error("can't find option")); }
+
+    req.option = option;
+    return next();
+  });
+});
+
+// route pour l'ensemble des options
+router.get('/options', function(req, res, next) {
+  Option.find(function(err, options){ // TODO: coloration en bleu de option normale ?? 
+    if(err){ 
+      return next(err);
+    }
+
+    res.json(option);
+  });
+});
+
+// route pour la création des options
+router.post('/options', auth, function(req, res, next) {
+  var option = new Option(req.body); // TODO: coloration en bleu de option normale ??
+
+  option.save(function(err, options){
+    if(err){ return next(err); }
+
+    res.json(options);
+  });
+}); 
+
+
+// ligne a conserver à la fin pour l'export des routes définies
 module.exports = router;
