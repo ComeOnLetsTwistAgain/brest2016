@@ -14,7 +14,7 @@ var passport = require('passport');
 mongoose.connect('mongodb://localhost/brest', function(err,db){
     if (!err){
         console.log('Connected to /brest!');
-    } else{
+    } else {
         console.dir(err); 
     }
 });

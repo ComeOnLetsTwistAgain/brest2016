@@ -9,36 +9,26 @@ var Comment = mongoose.model('Comment');
 var Animation = mongoose.model('Animation');
 var option = mongoose.model('Option'); 
 var User = mongoose.model('User');
+var Billet = mongoose.model('Billet');
+var Reservation = mongoose.model('Reservation');
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 
-/* GET home page. */
+/*
+*   HOME
+*/
+
 router.get('/', function(req, res) {
   res.render('index');
 });
 
-router.get('/posts', function(req, res, next) {
-  Post.find(function(err, posts){
-    if(err){ 
-      return next(err);
-    }
+// #######################################################
 
-    res.json(posts);
-  });
-});
 
-router.post('/posts', auth, function(req, res, next) {
-  var post = new Post(req.body);
-  post.author = req.payload.username;
-
-  post.save(function(err, post){
-    if(err){ return next(err); }
-
-    res.json(post);
-  });
-});
-
+/*
+*   POSTS A supprimer dans le future
+*/
 router.param('post', function(req, res, next, id) {
   var query = Post.findById(id);
 
@@ -60,6 +50,27 @@ router.param('comment', function(req, res, next, id) {
 
     req.comment = comment;
     return next();
+  });
+});
+
+router.get('/posts', function(req, res, next) {
+  Post.find(function(err, posts){
+    if(err){ 
+      return next(err);
+    }
+
+    res.json(posts);
+  });
+});
+
+router.post('/posts', auth, function(req, res, next) {
+  var post = new Post(req.body);
+  post.author = req.payload.username;
+
+  post.save(function(err, post){
+    if(err){ return next(err); }
+
+    res.json(post);
   });
 });
 
@@ -118,6 +129,12 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
   });
 });
 
+// #######################################################
+
+/*
+*   REGISTER
+*/
+
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -136,12 +153,18 @@ router.post('/register', function(req, res, next){
   });
 });
 
+// #######################################################
+
+/*
+*   LOGIN
+*/
+
 router.post('/login', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
 
-console.log('calling passport)');
+  console.log('calling passport)');
   passport.authenticate('local', function(err, user, info){
     if(err){ return next(err); }
 
@@ -152,5 +175,8 @@ console.log('calling passport)');
     }
   })(req, res, next);
 });
+
+// #######################################################
+
 
 module.exports = router;
