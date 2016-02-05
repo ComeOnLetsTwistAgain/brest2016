@@ -1,4 +1,6 @@
-var app = angular.module('brest', ['ui.router', 'brest.factories', 'brest.controllers']);
+var app = angular.module('brest', ['ui.router', 
+	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 
+	'brest.controllers']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
