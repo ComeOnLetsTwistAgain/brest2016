@@ -1,27 +1,30 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', 'auth', 'animations', 
-function($scope, auth, animations) {
+.controller('controllerAnimation', ['$scope', 'auth', 'factAnimations', 
+function($scope, auth, factAnimations) {
 
 	//on récupère toutes les animations présentes en base
-	$scope.animations = animations.animations;
+	$scope.animations = factAnimations.animations;
 
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant
 	$scope.user = auth.currentUser;
 
+
+
 	//ajouter une animation
 	$scope.addAnimation = function(){
 		if ($scope.libelle === '') {
 			return;
 		}
-		animations.create({
+		factAnimations.create({
+			
 			libelle : $scope.libelle,
 			//place_dispo : $scope.place_dispo,
 			place_max  : $scope.place_max,
-			heureDebut : $scope.heureDebut,
-			heureFin : $scope.heureFin,
+			heure_debut : $scope.heureDebut,
+			heure_fin : $scope.heureFin,
 			//listeOptions : $scope.listeOption,
 		}).success(function(animation){
 			$scope.animations.push(animation);
@@ -29,9 +32,9 @@ function($scope, auth, animations) {
 		//clear the values
 		$scope.libelle = '';
 		//$scope.place_debut = '';
-		$place_max  = '';
-		$heureDebut = '';
-		$heureFin = '';
+		$scope.place_max  = '';
+		$scope.heureDebut = '';
+		$scope.heureFin = '';
 		//$listeOptions = '';
 	};
 

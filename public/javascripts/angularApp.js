@@ -9,15 +9,16 @@ function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('home', {
 		url : '/home',
 		templateUrl : '/home.html',
-		controller : 'MainCtrl',
+		controller : 'controllerAnimation',
 		resolve : {
-			postPromise : ['posts',
-			function(posts) {
-				return posts.getAll();
+			animations : ['factAnimations',
+			function(animations) {
+				return animations.getAll();
 			}]
 
 		}
-	}).state('posts', {
+	})
+	.state('posts', {
 		url : '/posts/:id',
 		templateUrl : '/posts.html',
 		controller : 'PostsCtrl',
@@ -39,6 +40,12 @@ function($stateProvider, $urlRouterProvider) {
 		url : '/addAnimation',
 		templateUrl : '/addAnimation.html',
 		controller : 'controllerAnimation'
+		/*onEnter : ['$state', 'auth',
+		function($state, auth) {
+			if (auth.isLoggedIn()) {
+				$state.go('home');
+			}
+		}]*/
 	})
 
 
@@ -54,7 +61,9 @@ function($stateProvider, $urlRouterProvider) {
 			}
 		}]
 
-	}).state('register', {
+	})
+
+	.state('register', {
 		url : '/register',
 		templateUrl : '/register.html',
 		controller : 'AuthCtrl',

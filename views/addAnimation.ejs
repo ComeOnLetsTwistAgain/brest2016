@@ -3,18 +3,20 @@
     <h1>BREST 2016</h1>
 </div>
 
-  	<h2>Ajouter une animation</h2>
+  	<h2>Ajouter une animation </h2>
 
   	<form ng-submit="addAnimation()" style="margin-top:30px;">
 
     	<div class="form-group">
       		<input type="text" class="form-control" placeholder="Libelle" ng-model="libelle"></input>
       		<input type="text" class="form-control" placeholder="Nombre de place max" ng-model="place_max"></input>
-      		<input type="text" class="form-control" placeholder="Heure de début" ng-model="heureDebut"></input>
-      		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input>
+      		<input type="number" class="form-control" placeholder="Heure de début" ng-model="heureDebut"></input>
+      		<input type="number" class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input>
     	</div>
 
     	<button type="submit" class="btn btn-primary">Ajouter</button>
   	</form>
+
+
 
   </form>
