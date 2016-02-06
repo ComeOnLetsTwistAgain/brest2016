@@ -38,25 +38,25 @@ function($scope, auth, factAnimations) {
 		//$listeOptions = '';
 	};
 
+
+
 	/*$scope.addAnimation = function() {
 		console.log("adding animation");
 	}*/
 
 	//supprimer une animation
-	/*$scope.deleteAnimation = function(id_animation){
-		if (id_animation === ''){
-			return;
-		}
+	$scope.deleteAnimation = function(index_in_scope){
+		var animation = $scope.animations[index_in_scope];
+		console.log("deleting : " + index_in_scope);
+		if (animation._id === ''){return;}
 
-		animations.delete({
-			id : id_animation
-		}).success(function(){
-			$scope.animations.delete($scope.animations[id_animation]);
+		factAnimations.delete(animation._id).success(function(){
+			$scope.animations.splice(index_in_scope, 1);
 		});
 	};
 
 	//modifier une animation
-	$scope.updateAnimation = function(id_animation){
+	/*$scope.updateAnimation = function(id_animation){
 		if (id_animation === ''){
 			return;
 		}

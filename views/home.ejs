@@ -5,7 +5,8 @@
   <h2>Liste des animations</h2>
 
   <div ng-repeat="a in animations">
-    <span class="animation_libelle">{{a.libelle}}</span>
+    <span class="animation_libelle">{{a.libelle}}</span> 
+    <span ng-click="deleteAnimation($index)">supprimer</span>
   </div>
 
 

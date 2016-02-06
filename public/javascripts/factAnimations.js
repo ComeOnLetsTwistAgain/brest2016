@@ -23,7 +23,9 @@ angular.module('brest.factAnimations', [])
 	  });
 	};
 
-	
+	o.delete = function(id_animation) {
+		return $http.delete('/animations/'+ id_animation + '/remove');
+	}
 
 
 
