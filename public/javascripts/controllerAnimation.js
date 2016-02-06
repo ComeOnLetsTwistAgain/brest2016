@@ -18,25 +18,29 @@ function($scope, auth, animations) {
 		}
 		animations.create({
 			libelle : $scope.libelle,
-			place_dispo : $scope.place_dispo,
+			//place_dispo : $scope.place_dispo,
 			place_max  : $scope.place_max,
 			heureDebut : $scope.heureDebut,
 			heureFin : $scope.heureFin,
-			listeOptions : $scope.listeOption,
+			//listeOptions : $scope.listeOption,
 		}).success(function(animation){
 			$scope.animations.push(animation);
 		});
 		//clear the values
 		$scope.libelle = '';
-		$scope.place_debut = '';
+		//$scope.place_debut = '';
 		$place_max  = '';
 		$heureDebut = '';
-		$heureFin = '';''
-		$listeOptions = '';
+		$heureFin = '';
+		//$listeOptions = '';
 	};
 
+	/*$scope.addAnimation = function() {
+		console.log("adding animation");
+	}*/
+
 	//supprimer une animation
-	$scope.deleteAnimation = function(id_animation){
+	/*$scope.deleteAnimation = function(id_animation){
 		if (id_animation === ''){
 			return;
 		}
@@ -69,5 +73,5 @@ function($scope, auth, animations) {
 			//pas la meilleure methode, il faudrait trouver mieux
 			$scope.animations = animations.animations;
 		});
-	};
+	};*/
 }])

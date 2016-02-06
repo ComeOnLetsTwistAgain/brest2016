@@ -1,6 +1,7 @@
 var app = angular.module('brest', ['ui.router', 
 	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 
-	'brest.controllers']);
+
+	'brest.controllerAnimation', 'brest.controllers']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
@@ -27,11 +28,21 @@ function($stateProvider, $urlRouterProvider) {
 			}]
 
 		}
-	}).state('admin', {
+	})
+	.state('admin', {
 		url : '/admin',
 		templateUrl : '/admin.html',
 		controller : 'AdminCtrl'
 	})
+
+	.state('addAnimation', {
+		url : '/addAnimation',
+		templateUrl : '/addAnimation.html',
+		controller : 'controllerAnimation'
+	})
+
+
+
 	.state('login', {
 		url : '/login',
 		templateUrl : '/login.html',

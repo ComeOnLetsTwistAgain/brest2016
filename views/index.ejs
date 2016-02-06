@@ -10,7 +10,9 @@
 
   <!-- Angular app / controllers / routes / factories-->
   <script src="javascripts/angularApp.js"></script>
+
   <script src="javascripts/controllers.js"></script>
+  <script src="javascripts/controllerAnimation.js"></script>
   
   <script src="javascripts/factAuth.js"></script>
   <script src="javascripts/factPosts.js"></script>
@@ -25,7 +27,7 @@
 <body ng-app="brest">
   <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
     <ul class="nav navbar-nav">
-      <li ng-show="isAdmin()"><a href="/#/admin">Administration</a></li>
+      <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
       <li ng-show="isLoggedIn()"><a href="/#/mes_reservations">Mes reservations</a></li>
       <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
       <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()" style="color:red">Log Out</a></li>
@@ -44,6 +46,10 @@
   
   <script type="text/ng-template" id="/home.html">
     <% include animations %>
+  </script>
+
+  <script type="text/ng-template" id="/addAnimation.html">
+    <% include addAnimation %>
   </script>
 
   <script type="text/ng-template" id="/admin.html">

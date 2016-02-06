@@ -10,8 +10,11 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+var db_url = "mongodb://localhost/brest";
+//var db_url = "mongodb://ComeOnLetsTwistAgain:sambrest2016@ds054128.mongolab.com:54128/brest2016";
+
 // connect MongoDB
-mongoose.connect('mongodb://localhost/brest', function(err,db){
+mongoose.connect(db_url, function(err,db){
     if (!err){
         console.log('Connected to /brest!');
     } else {

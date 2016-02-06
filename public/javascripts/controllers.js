@@ -35,9 +35,7 @@ function($scope, posts, auth) {
 	};
 }])
 
-.controller('AdminCtrl', ['$scope', 'animations', function($scope, animations){
-	
-}])
+
 
 .controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
 function($scope, posts, post, auth) {
