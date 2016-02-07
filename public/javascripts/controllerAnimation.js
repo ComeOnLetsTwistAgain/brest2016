@@ -16,7 +16,7 @@ function($scope, auth, fileUpload, factAnimations) {
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
-		$scope.uploadFile();
+		//$scope.uploadFile();
 
 		if ($scope.libelle === '') {
 			return;
@@ -25,7 +25,7 @@ function($scope, auth, fileUpload, factAnimations) {
 			
 			libelle : $scope.libelle,
 			description : $scope.description,
-			nom_image : $scope.image.name,
+			//nom_image : $scope.image.name,
 			//place_dispo : $scope.place_dispo,
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
@@ -41,6 +41,7 @@ function($scope, auth, fileUpload, factAnimations) {
 		$scope.place_max  = '';
 		$scope.heureDebut = '';
 		$scope.heureFin = '';
+		$scope.description = '';
 		//$listeOptions = '';
 	};
 

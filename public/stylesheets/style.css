@@ -16,6 +16,11 @@ h2{
     z-index: 9999;
 }
 
+.nav_username{
+        background: #8C8383 !important;
+    color: white !important;
+}
+
 input, textarea{
 	margin-bottom: 15px;
 }
