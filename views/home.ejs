@@ -4,9 +4,22 @@
 
   <h2>Liste des animations</h2>
 
-  <div ng-repeat="a in animations">
-    <span class="animation_libelle">{{a.libelle}}</span> 
-    <span ng-click="deleteAnimation($index)">supprimer</span>
+
+
+  <div ng-repeat="a in animations" class="row animation">
+      <div class="col-md-5">
+          <a href="#">
+          </a>
+      </div>
+      <div class="col-md-7">
+          <h3>{{a.libelle}}</h3>
+          <h4>{{a.description}}</h4>          
+
+          <!-- ADMIN PART -->
+          <div  class="col-md-12">
+            <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer<span class="glyphicon glyphicon-trash"></span></a>
+          </div>
+      </div>
   </div>
 
 

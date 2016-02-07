@@ -58,6 +58,12 @@ app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 
+/* gestion du dossier d'upload d'images */
+app.use(bodyParser({
+        uploadDir: '/public/img',
+        keepExtensions: true
+    }));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
