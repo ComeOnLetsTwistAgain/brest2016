@@ -5,7 +5,7 @@ function($scope, auth, fileUpload, factAnimations) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
-
+	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant

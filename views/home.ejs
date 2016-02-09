@@ -16,7 +16,7 @@
           <h4>{{a.description}}</h4>          
 
           <!-- ADMIN PART -->
-          <div  class="col-md-12">
+          <div class="col-md-12" ng-show="isAdmin()">
             <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer<span class="glyphicon glyphicon-trash"></span></a>
           </div>
       </div>
