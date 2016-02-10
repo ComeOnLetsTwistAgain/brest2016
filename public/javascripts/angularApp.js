@@ -48,6 +48,18 @@ function($stateProvider, $urlRouterProvider) {
 		}]*/
 	})
 
+	.state('addOption', {
+		url : '/addOption',
+		templateUrl : '/addOption.html',
+		controller : 'controllerOption'
+		/*onEnter : ['$state', 'auth',
+		function($state, auth) {
+			if (auth.isAdmin()) {
+				$state.go('home');
+			}
+		}]*/
+	})
+
 
 
 	.state('login', {
