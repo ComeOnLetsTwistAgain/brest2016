@@ -312,6 +312,15 @@ router.get('/options', function(req, res, next) {
   });
 });
 
+router.get('/options/:id', function(req, res, next) {
+  option_model.findById(req.params.id, function(err, option) {
+    if(err) { return next(err);}
+    if(!option) { return res.send(404);}
+   
+    return res.json(option);
+  });
+});
+
 // route pour la création des options
 router.post('/options', auth, function(req, res, next) {
   var option = new option_model(req.body); // TODO: coloration en bleu de option normale ??
@@ -322,6 +331,17 @@ router.post('/options', auth, function(req, res, next) {
     res.json(option);
   });
 }); 
+
+router.delete('/options/:id/remove', function(req, res, next) {
+  option_model.findById(req.params.id, function(err, option) {
+    if(err) { return next(err);}
+    if(!option) { return res.send(404);}
+    option.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
+  });
+});
 
 
 // ligne a conserver à la fin pour l'export des routes définies

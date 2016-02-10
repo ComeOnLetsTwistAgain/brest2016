@@ -37,6 +37,7 @@ input, textarea{
 }
 .img_animation{
     background-image: url(../img/img_animation.jpg);
-    height: 150px;
+    height: 200px;
+    background-repeat: no-repeat;
     background-size: cover;
 }

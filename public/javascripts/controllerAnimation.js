@@ -6,6 +6,7 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
 	$scope.optionss = factOption.options;
+	
 
 	$scope.checked_options = [];
 
@@ -16,14 +17,20 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 	$scope.user = auth.currentUser;
 
 	$scope.addCheckOption = function(id_option){
-		if($scope.checked_options.indexOf(id_option) !== -1){
+		//on retire
+		if($scope.checked_options.indexOf(id_option) !== -1)
+		{
 			var index_in_array = $scope.checked_options.indexOf(id_option);
+
 			$scope.checked_options.splice(index_in_array, 1);
-		} else {
+		} 
+		//on ajoute
+		else 
+		{
+			/*var option = factOption.getOne(id_option);
+			console.log(option);*/
 			$scope.checked_options.push(id_option);
 		}
-		
-		console.log($scope.checked_options);
 	}
 
 
@@ -31,6 +38,8 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 	$scope.addAnimation = function(){
 
 		//$scope.uploadFile();
+
+		
 
 		if ($scope.libelle === '') {
 			return;
@@ -44,7 +53,7 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
-			//listeOptions : $scope.listeOption,
+			liste_options : $scope.checked_options,
 		}).success(function(animation){
 			$scope.animations.push(animation);
 		});

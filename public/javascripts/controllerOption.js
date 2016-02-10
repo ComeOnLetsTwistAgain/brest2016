@@ -4,7 +4,7 @@ angular.module('brest.controllerOption', [])
 function($scope, auth, factOption) {	
 
 	//on récupère toutes les options présentes en base
-	$scope.options = factOption.options;
+	$scope.optionss = factOption.options;
 
 	//ajouter une option à la liste d'options
 	$scope.addOption = function(id_option){
@@ -16,7 +16,7 @@ function($scope, auth, factOption) {
 			titre : $scope.titre_option,
 			description : $scope.description_option,
 		}).success(function(option){
-			$scope.options.push(option);
+			//$scope.optionss.push(option);
 		});
 
 		$scope.titre_option = "";
@@ -24,15 +24,13 @@ function($scope, auth, factOption) {
 	};
 
 	//supprimer une option à la liste d'options
-	$scope.deleteOption = function(id_option){
-		if (id_option === ''){
-			return;
-		}
+	$scope.deleteOption = function(index_in_scope){
+		var option = $scope.optionss[index_in_scope];
+		console.log("deleting : " + index_in_scope);
+		if (option._id === ''){return;}
 
-		options.delete({
-			id : id_option
-		}).success(function(){
-			$scope.options.delete($scope.options[id_opion]);
+		factOption.delete(option._id).success(function(){
+			$scope.optionss.splice(index_in_scope, 1);
 		});
 	};
 
