@@ -228,6 +228,17 @@ router.delete('/animations/:id/remove', function(req, res, next) {
   });
 });
 
+router.delete('/animations/:id', function(req, res, next) {
+  Animation.findById(req.params.id, function(err, animation) {
+    if(err) { return next(err);}
+    if(!animation) { return res.send(404);}
+    animation.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
+  });
+});
+
 // #######################################################
 
 /* 
