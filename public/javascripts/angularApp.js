@@ -61,7 +61,7 @@ function($stateProvider, $urlRouterProvider) {
 	})
 
 	.state('editAnimation', {
-		url : '/editAnimation/:id',
+		url : '/animations/:id',
 		templateUrl : '/editAnimation.html',
 		controller : 'controllerAnimation',resolve : {
 		animation : ['$stateParams', 'animations',

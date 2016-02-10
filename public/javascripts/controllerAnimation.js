@@ -80,7 +80,6 @@ function($scope, auth, fileUpload, factAnimations) {
 		var animationToUpdate = $scope.animations[id_animation];
 		
 		animations.update({
-			id : id_animation
 			libelle : $scope.libelle,
 			place_dispo : $scope.place_dispo,
 			place_max  : $scope.place_max,

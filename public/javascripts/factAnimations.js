@@ -28,11 +28,21 @@ angular.module('brest.factAnimations', [])
 	};
 
 	o.getOne = function(id_animation){
-		return $http.get('/animations/'+ id_animation ).then(function(res))
+		return $http.get('/animations/'+ id_animation ).then(function(res)
 		{
 			return res.data;
-		}
+		});
 	};
+		/*
+			o.get = function(id) {
+		//use the express route to grab this post and return the response
+		//from that route, which is a json of the post data
+		//.then is a promise, a kind of newly native thing in JS that upon cursory research
+		//looks friggin sweet; TODO Learn to use them like a boss.  First, this.
+		return $http.get('/posts/' + id).then(function(res) {
+			return res.data;
+		});
+	};*/
 
 	/*end methodes*/
 
