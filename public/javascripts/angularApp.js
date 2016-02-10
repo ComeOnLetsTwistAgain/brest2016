@@ -39,13 +39,13 @@ function($stateProvider, $urlRouterProvider) {
 	.state('addAnimation', {
 		url : '/addAnimation',
 		templateUrl : '/addAnimation.html',
-		controller : 'controllerAnimation'
-		/*onEnter : ['$state', 'auth',
-		function($state, auth) {
-			if (auth.isAdmin()) {
-				$state.go('home');
-			}
-		}]*/
+		controller : 'controllerAnimation',
+		resolve : {
+			options : ['$stateParams', 'factOption',
+			function($stateParams, factOption){
+				return factOption.getAll();
+			}]
+		}
 	})
 
 	.state('addOption', {

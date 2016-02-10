@@ -1,16 +1,30 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', 'auth', 'fileUpload', 'factAnimations', 
-function($scope, auth, fileUpload, factAnimations) {
+.controller('controllerAnimation', ['$scope', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
+function($scope, auth, fileUpload, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
+	$scope.optionss = factOption.options;
+
+	$scope.checked_options = [];
+
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant
 	$scope.user = auth.currentUser;
 
+	$scope.addCheckOption = function(id_option){
+		if($scope.checked_options.indexOf(id_option) !== -1){
+			var index_in_array = $scope.checked_options.indexOf(id_option);
+			$scope.checked_options.splice(index_in_array, 1);
+		} else {
+			$scope.checked_options.push(id_option);
+		}
+		
+		console.log($scope.checked_options);
+	}
 
 
 	//ajouter une animation
