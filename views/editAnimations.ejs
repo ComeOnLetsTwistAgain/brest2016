@@ -1,0 +1,30 @@
+<div class="page-header">
+
+    <h1>BREST 2016</h1>
+</div>
+
+  	<h2>Modifier une animation </h2>
+
+  	<form ng-submit="updateAnimation()" style="margin-top:30px;">
+
+    	<div class="form-group">
+          <input type="text" class="form-control" placeholder="Libelle" ng-model="libelle" ng-required="true"></input>
+
+      		<textarea placeholder="Description" class="form-control" ng-model="description"></textarea>
+
+          <!-- Image de présentation : 
+          <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile"> -->
+          
+
+      		<input type="text" class="form-control" placeholder="Nombre de place max" ng-model="place_max"></input>
+      		<input type="text" class="form-control" placeholder="Heure de début" ng-model="heureDebut"></input>
+      		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input>
+    	</div>
+
+    	<button type="submit" class="btn btn-primary">Ajouter</button>
+      
+  	</form>
+
+
+
+  </form>
