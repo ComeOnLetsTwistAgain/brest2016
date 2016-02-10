@@ -1,10 +1,10 @@
 angular.module('brest.controllerOption', [])
 
-.controller('controllerOption', ['$scope', 'auth', 'options', 
-function($scope, auth, options) {	
+.controller('controllerOption', ['$scope', 'auth', 'factOption', 
+function($scope, auth, factOption) {	
 
 	//on récupère toutes les options présentes en base
-	$scope.options = options.options;
+	$scope.options = factOption.options;
 
 	//ajouter une option à la liste d'options
 	$scope.addOption = function(id_option){
@@ -12,12 +12,15 @@ function($scope, auth, options) {
 			return;
 		}
 
-		options.create({
+		factOption.create({
 			titre : $scope.titre_option,
 			description : $scope.description_option,
 		}).success(function(option){
 			$scope.options.push(option);
 		});
+
+		$scope.titre_option = "";
+		$scope.description_option = "";
 	};
 
 	//supprimer une option à la liste d'options
