@@ -7,7 +7,7 @@ var jwt = require('express-jwt');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var Animation = mongoose.model('Animation');
-var option = mongoose.model('Option'); 
+var option_model = mongoose.model('Option'); 
 var User = mongoose.model('User');
 var Billet = mongoose.model('Billet');
 var Reservation = mongoose.model('Reservation');
@@ -271,7 +271,7 @@ router.get('/reservations', function(req, res, next) {
 
 
 // route pour la création d'une réservation 
-router.post('/animations', auth, function(req, res, next) {
+router.post('/reservations', auth, function(req, res, next) {
   var animation = new Animation(req.body);
 
   animation.save(function(err, reservations){
@@ -290,7 +290,7 @@ router.post('/animations', auth, function(req, res, next) {
 // parametre option
 router.param('option', function(req, res, next, id) {
   // var query = Reservation.findById(id);
-  var query = Option.findById(id); // TODO: coloration en bleu de option normale ?? 
+  var query = option_model.findById(id); // TODO: coloration en bleu de option normale ?? 
 
   query.exec(function (err, option){
     if (err) { return next(err); }
@@ -303,23 +303,23 @@ router.param('option', function(req, res, next, id) {
 
 // route pour l'ensemble des options
 router.get('/options', function(req, res, next) {
-  Option.find(function(err, options){ // TODO: coloration en bleu de option normale ?? 
+  option_model.find(function(err, options){ // TODO: coloration en bleu de option normale ?? 
     if(err){ 
       return next(err);
     }
 
-    res.json(option);
+    res.json(options);
   });
 });
 
 // route pour la création des options
 router.post('/options', auth, function(req, res, next) {
-  var option = new Option(req.body); // TODO: coloration en bleu de option normale ??
+  var option = new option_model(req.body); // TODO: coloration en bleu de option normale ??
 
-  option.save(function(err, options){
+  option.save(function(err, option){
     if(err){ return next(err); }
 
-    res.json(options);
+    res.json(option);
   });
 }); 
 

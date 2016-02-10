@@ -1,7 +1,7 @@
 var app = angular.module('brest', ['ui.router', 
-	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 
+	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 
 
-	'brest.controllerAnimation', 'brest.controllers']);
+	'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllers']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
@@ -39,25 +39,26 @@ function($stateProvider, $urlRouterProvider) {
 	.state('addAnimation', {
 		url : '/addAnimation',
 		templateUrl : '/addAnimation.html',
-		controller : 'controllerAnimation'
-		/*onEnter : ['$state', 'auth',
-		function($state, auth) {
-			if (auth.isAdmin()) {
-				$state.go('home');
-			}
-		}]*/
+		controller : 'controllerAnimation',
+		resolve : {
+			options : ['$stateParams', 'factOption',
+			function($stateParams, factOption){
+				return factOption.getAll();
+			}]
+		}
 	})
 
 	.state('addOption', {
 		url : '/addOption',
 		templateUrl : '/addOption.html',
-		controller : 'controllerOption'
-		/*onEnter : ['$state', 'auth',
-		function($state, auth) {
-			if (auth.isAdmin()) {
-				$state.go('home');
-			}
-		}]*/
+		controller : 'controllerOption',
+		resolve: {
+			options : ['$stateParams', 'factOption',
+			function($stateParams, factOption){
+				return factOption.getAll();
+			}]
+		}
+		
 	})
 
 	.state('editAnimation', {

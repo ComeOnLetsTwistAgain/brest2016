@@ -2,16 +2,20 @@
 
     <h1>BREST 2016</h1>
 </div>
+	<h2>Liste des options</h2>
+
+	<div ng-repeat="o in options">
+  		{{o.titre}}
+  	</div>
 
   	<h2>Ajouter une option </h2>
-
-
-  	<form ng-submit="addAnimation()" style="margin-top:30px;">
+  	
+  	<form ng-submit="addOption()" style="margin-top:30px;">
 
   		<div class="form-group">
-  			<input type="text" class="form-control" placeholder="Titre" ng-model="titre">
-  			<input type="text" class="form-control" placeholder="Description" ng-model="description">
+  			<input type="text" class="form-control" placeholder="Titre" ng-model="titre_option">
+  			<input type="text" class="form-control" placeholder="Description" ng-model="description_option">
   		</div>
 
-
+  		<button type="submit" class="btn btn-primary">Ajouter</button>
   	</form>
