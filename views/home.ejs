@@ -7,13 +7,17 @@
 
 
   <div ng-repeat="a in animations" class="row animation">
-      <div class="col-md-5">
+      <div class="col-md-5 img_animation">
           <a href="#">
           </a>
       </div>
       <div class="col-md-7">
           <h3>{{a.libelle}}</h3>
-          <h4>{{a.description}}</h4>          
+          <h4>{{a.description}}</h4>     
+
+          <div class="col-md-12">
+            <span><b>Début :</b> {{a.heure_debut}} - <b>Fin :</b> {{a.heure_fin}}</span>
+          </div>     
 
           <!-- ADMIN PART -->
           <div class="col-md-12" ng-show="isAdmin()">

@@ -31,3 +31,8 @@ input, textarea{
     padding-bottom: 10px;
     border-top: 1px solid lightgray;
 }
+.img_animation{
+    background-image: url(../img/img_animation.jpg);
+    height: 150px;
+    background-size: cover;
+}
