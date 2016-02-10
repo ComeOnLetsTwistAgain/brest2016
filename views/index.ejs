@@ -29,7 +29,10 @@
   <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
     <ul class="nav navbar-nav">
       <li><a href="/#/home">Accueil</a></li>
+
       <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
+      <li ng-show="isAdmin()"><a href="/#/addOption">Ajouter une option</a></li>
+
       <li ng-show="isLoggedIn()"><a href="/#/mes_reservations">Mes reservations</a></li>
       <li ng-show="isLoggedIn()"><a class="nav_username">{{ currentUser() }}</a></li>
       <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()" style="color:red">Log Out</a></li>

@@ -42,7 +42,7 @@ function($stateProvider, $urlRouterProvider) {
 		controller : 'controllerAnimation'
 		/*onEnter : ['$state', 'auth',
 		function($state, auth) {
-			if (auth.isLoggedIn()) {
+			if (auth.isAdmin()) {
 				$state.go('home');
 			}
 		}]*/

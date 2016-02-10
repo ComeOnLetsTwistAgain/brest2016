@@ -7,7 +7,7 @@ function($scope, auth, options) {
 	$scope.options = options.options;
 
 	//ajouter une option à la liste d'options
-	$scope.addOption = function(id_option){.
+	$scope.addOption = function(id_option){
 		if (id_option === ''){
 			return;
 		}
