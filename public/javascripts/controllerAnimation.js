@@ -73,7 +73,7 @@ function($scope, auth, fileUpload, factAnimations) {
         });
 	};
 	//modifier une animation
-	/*$scope.updateAnimation = function(id_animation){
+	$scope.updateAnimation = function(id_animation){
 		if (id_animation === ''){
 			return;
 		}
@@ -93,7 +93,7 @@ function($scope, auth, fileUpload, factAnimations) {
 			//pas la meilleure methode, il faudrait trouver mieux
 			$scope.animations = animations.animations;
 		});
-	};*/
+	};
 }])
 .service('fileUpload', ['$http', function ($http) {
             this.uploadFileToUrl = function(file, uploadUrl){

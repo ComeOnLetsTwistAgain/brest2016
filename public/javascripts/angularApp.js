@@ -48,6 +48,17 @@ function($stateProvider, $urlRouterProvider) {
 		}]*/
 	})
 
+	.state('editAnimation', {
+		url : '/editAnimation/:id',
+		templateUrl : '/editAnimation.html',
+		controller : 'controllerAnimation',resolve : {
+		animation : ['$stateParams', 'animations',
+			function($stateParams, animations) {
+				return animations.get($stateParams.id);
+			}]
+
+		}
+	})
 
 
 	.state('login', {

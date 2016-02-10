@@ -25,9 +25,14 @@ angular.module('brest.factAnimations', [])
 
 	o.delete = function(id_animation) {
 		return $http.delete('/animations/'+ id_animation + '/remove');
-	}
+	};
 
-
+	o.getOne = function(id_animation){
+		return $http.get('/animations/'+ id_animation ).then(function(res))
+		{
+			return res.data;
+		}
+	};
 
 	/*end methodes*/
 
