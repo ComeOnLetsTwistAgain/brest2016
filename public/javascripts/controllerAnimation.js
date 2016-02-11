@@ -147,6 +147,8 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 			return;
 		}
 		var animationToUpdate = $scope.animations[id_animation];
+
+		Console.log("Animation a modifier "+ id_animation);
 		
 		animations.update({
 			libelle : $scope.libelle,
