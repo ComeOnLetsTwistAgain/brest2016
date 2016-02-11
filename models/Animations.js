@@ -9,7 +9,11 @@ var AnimationsSchema = new mongoose.Schema({
 	place_max : Number,
 	heure_debut : String,
 	heure_fin : String, 
-	liste_options: [{type: mongoose.Schema.Types.ObjectId, ref: 'Option'}]
+	liste_options: [
+		{
+			titre : String
+		}
+	]
 });
 
 mongoose.model('Animation', AnimationsSchema);

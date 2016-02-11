@@ -1,13 +1,21 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
-function($scope, auth, fileUpload, factAnimations, factOption) {
+.controller('controllerAnimation', ['$scope', '$q', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
+function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
-	$scope.optionss = factOption.options;
-	
 
+	//toutes les options
+	$scope.optionss = factOption.options;
+
+	$scope.option_in_animation = [
+		{'titre' : 'lalalala'}
+	];
+
+
+	
+	//utilisé dans addAnimation
 	$scope.checked_options = [];
 
 	$scope.isAdmin = auth.isAdmin;
@@ -17,29 +25,66 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 	$scope.user = auth.currentUser;
 
 	$scope.addCheckOption = function(id_option){
+
 		//on retire
 		if($scope.checked_options.indexOf(id_option) !== -1)
 		{
 			var index_in_array = $scope.checked_options.indexOf(id_option);
-
 			$scope.checked_options.splice(index_in_array, 1);
-		} 
+		}
 		//on ajoute
 		else 
 		{
-			/*var option = factOption.getOne(id_option);
-			console.log(option);*/
 			$scope.checked_options.push(id_option);
 		}
+	}
+
+	$scope.fillOptionsInAnimation = function(){
+		for (var i = 0 ; i < $scope.checked_options.length; i++) {
+			console.log($scope.checked_options[i]);
+
+			var option = factOption.getOne($scope.checked_options[i]);
+			option.then(function(result){
+				
+				var object = {
+					'titre' : result.data.titre
+					//description : result.data.description
+				};
+
+				console.log(object);
+				$scope.option_in_animation.push(object);
+			})
+		};
+
+		//on créer et ajoute les options dans le scope option
+		/*angular.forEach($scope.checked_options, function(value){
+			var option = factOption.getOne(value);
+
+			option.then(function(result){
+				
+				var object = {
+					'titre' : result.data.titre
+					//description : result.data.description
+				};
+
+				console.log(object);
+				$scope.option_in_animation.push(object);
+			})
+			//$scope.option_in_animation.push();
+		});*/
 	}
 
 
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
-		//$scope.uploadFile();
-
 		
+		fillOptionsInAnimation();
+		
+
+		console.log($scope.option_in_animation);
+	
+	//	return;
 
 		if ($scope.libelle === '') {
 			return;
@@ -53,7 +98,8 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
-			liste_options : $scope.checked_options,
+			liste_options : $scope.option_in_animation
+
 		}).success(function(animation){
 			$scope.animations.push(animation);
 		});
@@ -117,6 +163,9 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 		});
 	};
 }])
+
+
+
 .service('fileUpload', ['$http', function ($http) {
             this.uploadFileToUrl = function(file, uploadUrl){
                var fd = new FormData();

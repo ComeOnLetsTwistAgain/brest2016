@@ -30,7 +30,7 @@ angular.module('brest.factOption', [])
 	o.getOne = function(id_option){
 		return $http.get('/options/'+ id_option ).then(function(res)
 		{
-			return res.data;
+			return res;
 		});
 	};
 		/*

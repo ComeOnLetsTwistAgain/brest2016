@@ -6,8 +6,9 @@ var jwt = require('express-jwt');
 
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
-var Animation = mongoose.model('Animation');
 var option_model = mongoose.model('Option'); 
+var Animation = mongoose.model('Animation');
+
 var User = mongoose.model('User');
 var Billet = mongoose.model('Billet');
 var Reservation = mongoose.model('Reservation');
@@ -197,6 +198,7 @@ router.param('animation', function(req, res, next, id) {
 
 // route pour l'ensemble des animations
 router.get('/animations', function(req, res, next) {
+  
   Animation.find(function(err, animations){
     if(err){ 
       return next(err);

@@ -7,7 +7,6 @@
   <h2>Liste des animations</h2>
 
 
-
   <div ng-repeat="a in animations" class="row animation" >
       <div class="col-md-5 img_animation">
           <a href="#">
@@ -22,9 +21,11 @@
             <span>Début : <b>{{a.heure_debut}}</b> - Fin : <b>{{a.heure_fin}}</b></span>
           </div>     
           <br/><br/>
-          <h4>Options disponible</h4>
+          <h4>Options disponibles</h4>
           <div class="col-md-12 ajout-options">
-            
+            <div ng-repeat="o in a.liste_options">
+              {{o}}
+            </div>
           </div>
           <br/><br/>
           <!-- ADMIN PART -->
@@ -34,6 +35,8 @@
           </div>
       </div>
   </div>
+
+
 
 
 
