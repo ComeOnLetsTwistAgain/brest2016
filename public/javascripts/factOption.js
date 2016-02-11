@@ -23,12 +23,12 @@ angular.module('brest.factOption', [])
 	  });
 	};
 
-	o.delete = function(id_animation) {
-		return $http.delete('/animations/'+ id_animation + '/remove');
+	o.delete = function(id_option) {
+		return $http.delete('/options/'+ id_option + '/remove');
 	};
 
-	o.getOne = function(id_animation){
-		return $http.get('/animations/'+ id_animation ).then(function(res)
+	o.getOne = function(id_option){
+		return $http.get('/options/'+ id_option ).then(function(res)
 		{
 			return res.data;
 		});

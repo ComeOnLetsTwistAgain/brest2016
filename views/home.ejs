@@ -1,3 +1,5 @@
+
+
 <div class="page-header">
     <h1>BREST 2016</h1>
   </div>
@@ -6,7 +8,7 @@
 
 
 
-  <div ng-repeat="a in animations" class="row animation">
+  <div ng-repeat="a in animations" class="row animation" >
       <div class="col-md-5 img_animation">
           <a href="#">
           </a>
@@ -16,9 +18,15 @@
           <h4>{{a.description}}</h4>     
 
           <div class="col-md-12">
-            <span><b>Début :</b> {{a.heure_debut}} - <b>Fin :</b> {{a.heure_fin}}</span>
+            <span>Places disponibles : <b>{{a.place_max}}</b></span><br/>
+            <span>Début : <b>{{a.heure_debut}}</b> - Fin : <b>{{a.heure_fin}}</b></span>
           </div>     
-
+          <br/><br/>
+          <h4>Options disponible</h4>
+          <div class="col-md-12 ajout-options">
+            
+          </div>
+          <br/><br/>
           <!-- ADMIN PART -->
           <div class="col-md-12" ng-show="isAdmin()">
             <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a>
