@@ -2,7 +2,8 @@ angular.module('brest.factAnimations', [])
 
 .factory('factAnimations', ['$http', 'auth', function($http, auth){
 	var o = {
-		animations : []
+		animations : [],
+		animation : {}
 	};
 
 
@@ -30,6 +31,7 @@ angular.module('brest.factAnimations', [])
 	o.getOne = function(id_animation){
 		return $http.get('/animations/'+ id_animation + '/edit' ).then(function(res)
 		{
+			angular.copy(res.data, o.animation);
 			return res.data;
 		});
 	};

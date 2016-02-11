@@ -5,6 +5,7 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
+	$scope.animation = factAnimations.animation;
 
 	//toutes les options
 	$scope.optionss = factOption.options;
