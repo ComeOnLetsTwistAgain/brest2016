@@ -303,7 +303,7 @@ router.param('reservation', function(req, res, next, id) {
 
 // route pour l'ensemble des réservations
 router.get('/reservations', function(req, res, next) {
-  Animation.find(function(err, reservations){
+  Reservation.find(function(err, reservations){
     if(err){ 
       return next(err);
     }
@@ -315,12 +315,12 @@ router.get('/reservations', function(req, res, next) {
 
 // route pour la création d'une réservation 
 router.post('/reservations', auth, function(req, res, next) {
-  var animation = new Animation(req.body);
+  var reservation = new Reservation(req.body);
 
-  animation.save(function(err, reservations){
+  reservation.save(function(err, reservation){
     if(err){ return next(err); }
 
-    res.json(reservations);
+    res.json(reservation);
   });
 });
 

@@ -6,28 +6,14 @@ function($scope, auth, factReservations) {
 	//on récupère toutes les réservations présentes en base
 	$scope.reservations = factReservations.reservations;
 
+	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant
-	$scope.user = auth.currentUser;
+	$scope.user = auth.currentUser();
 
-	//fonction pour créer une réservations
-	$scope.addReservation = function(){
-		if ($scope.animation === '') {
-			return;
-		}
-		reservations.create({
-			libelle_animation : $scope.libelle_animatio,
-			user : $scope.user,
-			nbPlaceReserve : $scope.nbPlaceReservee, 
-			listeOptions : $scope.listeOption,
-		});
-		//clear the values
-		$scope.animation = '';
-		$scope.listeUsers = '';
-		$listeOptions  = '';
-	};
 
+	console.log($scope.reservations);
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(id_reservation){
 		if (id_reservation === ''){

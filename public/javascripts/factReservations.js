@@ -16,7 +16,7 @@ angular.module('brest.factReservations', [])
 	};
 
 	o.create = function(reservation) {
-	  return $http.post('/reservations', animation, {
+	  return $http.post('/reservations', reservation, {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
 	    o.reservations.push(data);
