@@ -277,6 +277,7 @@ router.put('/animations/:id', function(req, res, next) {
     animation.nom_image = req.body.animation.nom_image;
     animation.place_dispo = req.body.animation.place_dispo;
     animation.place_max = req.body.animation.place_max;
+    animation.date = req.body.animation.date;
     animation.heure_debut = req.body.animation.heure_debut;
     animation.heure_fin = req.body.animation.heure_fin;
     animation.liste_options = req.body.animation.liste_options;

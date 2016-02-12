@@ -7,6 +7,7 @@ var AnimationsSchema = new mongoose.Schema({
 	nom_image : String,
 	place_dispo : Number,
 	place_max : Number,
+	date : Date,
 	heure_debut : String,
 	heure_fin : String, 
 	liste_options: [

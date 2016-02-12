@@ -115,6 +115,7 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			//nom_image : $scope.image.name,
 			place_dispo : $scope.place_max,
 			place_max  : $scope.place_max,
+			date : $scope.date,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
 			liste_options : tab
@@ -125,6 +126,7 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 		$scope.libelle = '';
 		//$scope.place_debut = '';
 		$scope.place_max  = '';
+		$scope.date = '';
 		$scope.heureDebut = '';
 		$scope.heureFin = '';
 		$scope.description = '';
@@ -222,6 +224,7 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			place_dispo : $scope.animation.place_dispo,
 			description : $scope.animation.description,
 			place_max  : $scope.animation.place_max,
+			date : $scope.animation.date,
 			heure_debut : $scope.animation.heure_debut,
 			heure_fin : $scope.animation.heure_fin,
 			liste_options : tab,
