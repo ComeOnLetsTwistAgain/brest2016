@@ -10,14 +10,10 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 	//toutes les options
 	$scope.optionss = factOption.options;
 
-	$scope.option_in_animation = [
+	$scope.option_in_animation = [];
+	$scope.checkboxes = [];
 
-	];
 
-
-	
-	//utilisé dans addAnimation
-	$scope.checked_options = [];
 
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
@@ -33,7 +29,8 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 		var found = $filter('getById')($scope.option_in_animation, id_option);
 
-		console.log(found);
+		console.log($scope.checkboxes);
+		
 
 		//on retire
 		if(found != null)
@@ -68,14 +65,11 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 	$scope.addAnimation = function(){
 
 		//on met toute les option de option_in_animation dans un tableau
+		//qu'on passe après en paramêtre a liste_options
 		var tab = [];
 		angular.forEach($scope.option_in_animation, function(value){
 			tab.push(value.option);
 		});
-
-		console.log(tab);
-
-		
 
 		if ($scope.libelle === '') {
 			return;
@@ -89,10 +83,9 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
-			liste_options : $scope.option_in_animation
+			liste_options : tab
 
 		}).success(function(animation){
-			console.log($scope.option_in_animation);
 			$scope.animations.push(animation);
 		});
 
@@ -103,7 +96,11 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 		$scope.heureDebut = '';
 		$scope.heureFin = '';
 		$scope.description = '';
-		//$listeOptions = '';
+		//on uncheck toute les boxes
+
+		angular.forEach($scope.checkboxes, function (item) {
+            console.log(item);
+        });
 	};
 
 	//supprimer une animation

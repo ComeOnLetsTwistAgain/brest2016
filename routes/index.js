@@ -244,6 +244,19 @@ router.get('/animations/:id/edit', function(req, res, next) {
   });
 });
 
+router.get('/animations/:id', function(req, res, next) {
+  Animation.findById(req.params.id, function(err, animation) {
+    if(err) { 
+      return next(err);
+    }
+    if(!animation) { 
+      console.log("404 - /animations/:id/edit");
+      return res.send(404);
+    }
+    return res.json(animation);
+  });
+});
+
 // router.get('/options/:id', function(req, res, next) {
 //   option_model.findById(req.params.id, function(err, option) {
 //     if(err) { return next(err);}

@@ -74,6 +74,19 @@ function($stateProvider, $urlRouterProvider) {
 		}
 	})
 
+	.state('seeAnimation', {
+		url : '/animations/:id',
+		templateUrl : '/animation.html',
+		controller : 'controllerAnimation',
+		resolve : {
+		animation : ['$stateParams', 'factAnimations',
+			function($stateParams, factAnimations) {
+				return factAnimations.getReservationPage($stateParams.id);
+			}]
+
+		}
+	})
+
 
 	.state('login', {
 		url : '/login',
