@@ -33,6 +33,12 @@ angular.module('brest.factReservations', [])
 			return res.data;
 		});
 	};
+
+	o.decrPlacesDispo = function(id_animation, nbPlaces){
+		return $http.put('/animations/' + id_animation + '/decrPlaceDispo', {
+			headers: {Authorization: 'Bearer '+auth.getToken()}
+	  	});
+	}
 		/*
 			o.get = function(id) {
 		//use the express route to grab this post and return the response

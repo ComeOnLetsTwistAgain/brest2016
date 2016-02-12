@@ -149,10 +149,10 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			listOptions : tab
 		}).then(function(){
 
-			
+			factReservations.decrPlacesDispo($scope.animation._id, $scope.nbPlaceReserve);
 
 			$scope.nbPlaceReserve  = '';
-			$state.go('home');
+			//$state.go('home');
 		});
 	}
 

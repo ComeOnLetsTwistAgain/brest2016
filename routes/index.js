@@ -257,18 +257,13 @@ router.get('/animations/:id', function(req, res, next) {
   });
 });
 
-router.put('/posts/:id/upvote', auth, function(req, res, next) {
+router.put('/animations/:id/decrPlaceDispo', auth, function(req, res, next) {
   Animation.findById(req.params.id, function(err, animation){
     if(err){return next(err);}
     if(!animation) {return res.send(404);}
 
+    console.log("incrPlaceDispo by " + req.body.nbPlaces);
     
-  });
-
-  req.post.upvote(function(err, post){
-    if (err) { return next(err); }
-
-    res.json(post);
   });
 });
 
