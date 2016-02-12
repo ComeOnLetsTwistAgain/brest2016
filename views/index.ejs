@@ -16,6 +16,8 @@
   <script src="javascripts/controllerAnimation.js"></script>
   <script src="javascripts/controllerOption.js"></script>
   <script src="javascripts/controllerReservation.js"></script>
+  <script src="javascripts/controllerCode.js"></script>
+  <script src="javascripts/controllerNav.js"></script>
   
   <script src="javascripts/factAuth.js"></script>
   <script src="javascripts/factPosts.js"></script>
@@ -29,8 +31,12 @@
 
 </head>
 
+
+
 <body ng-app="brest">
-  <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+
+  <nav class="navbar navbar-default pull-right" ng-controller="controllerNav" ng-hide="currentPath() === '/code'">
+    
     <ul class="nav navbar-nav">
       <li><a href="/#/home">Accueil</a></li>
 

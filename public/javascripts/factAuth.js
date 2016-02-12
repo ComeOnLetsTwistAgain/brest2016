@@ -1,7 +1,7 @@
 angular.module('brest.factAuth', [])
 
-.factory('auth', ['$http', '$window',
-function($http, $window) {
+.factory('auth', ['$http','$location', '$window',
+function($http, $location, $window) {
 	var auth = {};
 
 	auth.saveToken = function(token) {
@@ -37,6 +37,10 @@ function($http, $window) {
 
 			return payload.username;
 		}
+	};
+
+	auth.getCurrentPath = function(){
+		return $location.path();
 	};
 
 	auth.register = function(user) {

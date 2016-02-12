@@ -35,6 +35,9 @@ input, textarea{
     padding-bottom: 10px;
     border-top: 1px solid lightgray;
 }
+.alert{
+    margin-top: 15px;
+}
 .img_animation{
     background-image: url(../img/img_animation.jpg);
     height: 200px;

@@ -24,6 +24,8 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 	//retourne l'user courant
 	$scope.user = auth.currentUser();
 
+	
+
 
 
 	$scope.addCheckOption = function(id_option){
@@ -55,9 +57,6 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 					}
 				);
 			});
-
-			
-			
 		}
 	}
 
@@ -96,8 +95,6 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 	}
 
 	
-
-
 	//ajouter une animation
 	$scope.addAnimation = function(){
 

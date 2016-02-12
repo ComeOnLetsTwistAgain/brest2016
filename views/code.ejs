@@ -1,12 +1,19 @@
 <div>
+	<div ng-show="error" class="alert alert-danger">
+	  <strong>ERREUR</strong> - Le code rentré n'est pas valide
+	</div>
+
 	<form ng-submit="checkCode()" style="margin-top:30px;">
     	<h3>Veuillez entrer le code (inscrit sur votre billet)</h3>
 
     	<div class="form-group">
-      		<input type="text" class="form-control" placeholder="code" ng-model="code"></input>
+      		<input type="text" class="form-control" placeholder="code" ng-required="true" ng-model="formData.code"></input>
     	</div>
 
     	<button type="submit" class="btn btn-primary">Accéder au site</button>
   	</form>
+  	{{success}}
+  	{{failed}}
+  	{{formData}}
 
 </div>
