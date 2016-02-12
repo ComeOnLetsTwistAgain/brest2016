@@ -14,11 +14,11 @@
       </div>
       <div class="col-md-7">
           <div class="col-md-6"><h3>{{a.libelle}}</h3></div>
-          <div class="col-md-6"> <a class="btn btn-primary" href="/#/animations/{{a._id}}">Réserver <span class="glyphicon glyphicon-ok"></span></a></div>
+          <div class="col-md-6"> </div>
           <div class="col-md-12"><h5>{{a.description}}</h5>  </div>   
 
           <div class="col-md-12">
-            <span>Places disponibles : <b>{{a.place_max}}</b></span><br/>
+            <span>Places disponibles : <b>{{a.place_dispo}}</b></span><br/>
             <span>Début : <b>{{a.heure_debut}}</b> - Fin : <b>{{a.heure_fin}}</b></span>
           </div>     
           <br/><br/>
@@ -31,8 +31,10 @@
           <br/><br/>
           <!-- ADMIN PART -->
           <div class="col-md-12" ng-show="isAdmin()">
+            <a class="btn btn-primary" href="/#/animations/{{a._id}}">Réserver <span class="glyphicon glyphicon-ok"></span></a>
             <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a>
             <a class="btn btn-warning" href="/#/animations/{{a._id}}/edit">Modifier <span class="glyphicon glyphicon-pencil"></span></a>
+
           </div>
       </div>
   </div>
