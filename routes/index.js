@@ -6,8 +6,9 @@ var jwt = require('express-jwt');
 
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
-var Animation = mongoose.model('Animation');
 var option_model = mongoose.model('Option'); 
+var Animation = mongoose.model('Animation');
+
 var User = mongoose.model('User');
 var Billet = mongoose.model('Billet');
 var Reservation = mongoose.model('Reservation');
@@ -197,6 +198,7 @@ router.param('animation', function(req, res, next, id) {
 
 // route pour l'ensemble des animations
 router.get('/animations', function(req, res, next) {
+  
   Animation.find(function(err, animations){
     if(err){ 
       return next(err);
@@ -228,13 +230,54 @@ router.delete('/animations/:id/remove', function(req, res, next) {
   });
 });
 
-router.delete('/animations/:id', function(req, res, next) {
+
+router.get('/animations/:id/edit', function(req, res, next) {
   Animation.findById(req.params.id, function(err, animation) {
-    if(err) { return next(err);}
-    if(!animation) { return res.send(404);}
-    animation.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
+    if(err) { 
+      return next(err);
+    }
+    if(!animation) { 
+      console.log("404 - /animations/:id/edit");
+      return res.send(404);
+    }
+    return res.json(animation);
+  });
+});
+
+router.get('/animations/:id', function(req, res, next) {
+  Animation.findById(req.params.id, function(err, animation) {
+    if(err) { 
+      return next(err);
+    }
+    if(!animation) { 
+      console.log("404 - /animations/:id/edit");
+      return res.send(404);
+    }
+    return res.json(animation);
+  });
+});
+
+// router.get('/options/:id', function(req, res, next) {
+//   option_model.findById(req.params.id, function(err, option) {
+//     if(err) { return next(err);}
+//     if(!option) { return res.send(404);}
+   
+//     return res.json(option);
+//   });
+// });
+
+
+router.put('/animations/:id', function(req, res, next) {
+  
+  
+  Animation.findById(req.params.id, function(err, animation) {
+    
+    animation.libelle = req.body.animation.libelle;
+
+
+    animation.save(function (err) {
+      if (err) return handleError(err);
+      res.send(animation);
     });
   });
 });

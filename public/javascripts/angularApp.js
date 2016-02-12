@@ -62,12 +62,26 @@ function($stateProvider, $urlRouterProvider) {
 	})
 
 	.state('editAnimation', {
-		url : '/animations/:id',
+		url : '/animations/:id/edit',
 		templateUrl : '/editAnimation.html',
-		controller : 'controllerAnimation',resolve : {
-		animation : ['$stateParams', 'animations',
-			function($stateParams, animations) {
-				return animations.get($stateParams.id);
+		controller : 'controllerAnimation',
+		resolve : {
+		animation : ['$stateParams', 'factAnimations',
+			function($stateParams, factAnimations) {
+				return factAnimations.getOne($stateParams.id);
+			}]
+
+		}
+	})
+
+	.state('seeAnimation', {
+		url : '/animations/:id',
+		templateUrl : '/animation.html',
+		controller : 'controllerAnimation',
+		resolve : {
+		animation : ['$stateParams', 'factAnimations',
+			function($stateParams, factAnimations) {
+				return factAnimations.getReservationPage($stateParams.id);
 			}]
 
 		}

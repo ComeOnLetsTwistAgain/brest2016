@@ -24,16 +24,13 @@
       <h3>Ajout d'options</h3>
       <div class="col-md-12 ajout-options">
         <div ng-repeat="o in optionss">
-          <input type="checkbox" ng-model="addOption" ng-change="addCheckOption(o._id)" id="{{o._id}}"> <label for="{{o._id}}">{{o.titre}}</label>
+          <input type="checkbox" ng-model="checkboxes.selected" ng-change="addCheckOption(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}</label>
         </div>
       </div>
-
-      {{checked_options | json}}
-      <br/>
 
     	<button type="submit" class="btn btn-primary">Ajouter</button>
   	</form>
 
 
-
+{{checkboxes}}
   </form>

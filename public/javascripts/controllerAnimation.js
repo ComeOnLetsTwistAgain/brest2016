@@ -1,14 +1,19 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
-function($scope, auth, fileUpload, factAnimations, factOption) {
+.controller('controllerAnimation', ['$scope', '$filter', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
+function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
-	$scope.optionss = factOption.options;
-	
+	$scope.animation = factAnimations.animation;
 
-	$scope.checked_options = [];
+	//toutes les options
+	$scope.optionss = factOption.options;
+
+	$scope.option_in_animation = [];
+	$scope.checkboxes = [];
+
+
 
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
@@ -16,30 +21,55 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 	//retourne l'user courant
 	$scope.user = auth.currentUser;
 
-	$scope.addCheckOption = function(id_option){
-		//on retire
-		if($scope.checked_options.indexOf(id_option) !== -1)
-		{
-			var index_in_array = $scope.checked_options.indexOf(id_option);
 
-			$scope.checked_options.splice(index_in_array, 1);
-		} 
+
+	$scope.addCheckOption = function(id_option){
+
+		//contient tous les idoption des options ajoutée
+
+		var found = $filter('getById')($scope.option_in_animation, id_option);
+
+		console.log($scope.checkboxes);
+		
+
+		//on retire
+		if(found != null)
+		{
+
+			var index_in_array = $scope.option_in_animation.indexOf(found);
+			$scope.option_in_animation.splice(index_in_array, 1);
+		}
 		//on ajoute
 		else 
 		{
-			/*var option = factOption.getOne(id_option);
-			console.log(option);*/
-			$scope.checked_options.push(id_option);
+			var option = factOption.getOne(id_option);
+			option.then(function(result){
+				
+				$scope.option_in_animation.push(
+					{
+						'idoption' : id_option,
+						'option' : result.data
+					}
+				);
+			});
+
+			
+			
 		}
 	}
+
+	
 
 
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
-		//$scope.uploadFile();
-
-		
+		//on met toute les option de option_in_animation dans un tableau
+		//qu'on passe après en paramêtre a liste_options
+		var tab = [];
+		angular.forEach($scope.option_in_animation, function(value){
+			tab.push(value.option);
+		});
 
 		if ($scope.libelle === '') {
 			return;
@@ -53,7 +83,8 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
-			liste_options : $scope.checked_options,
+			liste_options : tab
+
 		}).success(function(animation){
 			$scope.animations.push(animation);
 		});
@@ -65,7 +96,11 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
 		$scope.heureDebut = '';
 		$scope.heureFin = '';
 		$scope.description = '';
-		//$listeOptions = '';
+		//on uncheck toute les boxes
+
+		angular.forEach($scope.checkboxes, function (item) {
+            console.log(item);
+        });
 	};
 
 	//supprimer une animation
@@ -95,28 +130,69 @@ function($scope, auth, fileUpload, factAnimations, factOption) {
             //console.log($scope.image.name);
         });
 	};
+
+		//modifier une option
+	$scope.updateOption = function(id_option){
+		if (id_option === ''){
+			return;
+		}
+
+		options.update({
+			id : id_option
+		}).success(function(){
+			//réactualisation du tableau comprenant nos options
+			//pas la meilleure methode, il faudrait trouver mieux
+			$scope.options = options.options;
+		})
+	}
+
+
+
 	//modifier une animation
 	$scope.updateAnimation = function(id_animation){
 		if (id_animation === ''){
 			return;
 		}
-		var animationToUpdate = $scope.animations[id_animation];
+		var animationToUpdate = $scope.animations[id_animation]; // recupère notre animation
+
+		console.log("Animation a modifier "+ id_animation);
 		
-		animations.update({
-			libelle : $scope.libelle,
-			place_dispo : $scope.place_dispo,
-			place_max  : $scope.place_max,
-			heureDebut : $scope.heureDebut,
-			heureFin : $scope.heureFin,
-			listeOption : $scope.listeOption,
+		animation = animationToUpdate; 
+
+		factAnimations.update(id_animation, {
+			libelle : $scope.animation.libelle,
+			place_dispo : $scope.animation.place_dispo,
+			description : $scope.animation.description,
+			place_max  : $scope.animation.place_max,
+			heure_debut : $scope.animation.heure_debut,
+			heure_fin : $scope.animation.heure_fin,
+			//liste_option : $scope.animation.listeOption,
 		}).success(function(){
 
 			//réactualisation du tableau comprenant nos animations
 			//pas la meilleure methode, il faudrait trouver mieux
-			$scope.animations = animations.animations;
+			$scope.animations = factAnimations.animations;
 		});
 	};
 }])
+
+.filter('getById', function() {
+  return function(input, id) {
+  	// console.log("searching for " + id  + " in ");
+  	// console.log(input);
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (input[i].idoption == id) {
+        return input[i];
+      }
+    }
+    return null;
+  }
+})
+
+
+
+
 .service('fileUpload', ['$http', function ($http) {
             this.uploadFileToUrl = function(file, uploadUrl){
                var fd = new FormData();
