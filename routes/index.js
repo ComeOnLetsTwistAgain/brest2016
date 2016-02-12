@@ -234,11 +234,24 @@ router.delete('/animations/:id/remove', function(req, res, next) {
 router.get('/animations/:id/edit', function(req, res, next) {
   Animation.findById(req.params.id, function(err, animation) {
     if(err) { 
-      return next(err);}
+      return next(err);
+    }
     if(!animation) { 
       console.log("404 - /animations/:id/edit");
-      return res.send(404);}
+      return res.send(404);
+    }
     return res.json(animation);
+  });
+});
+
+
+router.put('/animations/:id', function(req, res, next) {
+  Animation.findById(req.params.id, function(err, animation) {
+    console.log(req.body.libelle);
+    animation.save(function (err) {
+      if (err) return handleError(err);
+      res.send(animation);
+    });
   });
 });
 

@@ -67,7 +67,6 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
-		
 		//on met toute les option de option_in_animation dans un tableau
 		var tab = [];
 		angular.forEach($scope.option_in_animation, function(value){
@@ -134,27 +133,48 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
             //console.log($scope.image.name);
         });
 	};
+
+		//modifier une option
+	$scope.updateOption = function(id_option){
+		if (id_option === ''){
+			return;
+		}
+
+		options.update({
+			id : id_option
+		}).success(function(){
+			//réactualisation du tableau comprenant nos options
+			//pas la meilleure methode, il faudrait trouver mieux
+			$scope.options = options.options;
+		})
+	}
+
+
+
 	//modifier une animation
 	$scope.updateAnimation = function(id_animation){
 		if (id_animation === ''){
 			return;
 		}
-		var animationToUpdate = $scope.animations[id_animation];
+		var animationToUpdate = $scope.animations[id_animation]; // recupère notre animation
 
-		Console.log("Animation a modifier "+ id_animation);
+		console.log("Animation a modifier "+ id_animation);
 		
-		animations.update({
-			libelle : $scope.libelle,
-			place_dispo : $scope.place_dispo,
-			place_max  : $scope.place_max,
-			heureDebut : $scope.heureDebut,
-			heureFin : $scope.heureFin,
-			listeOption : $scope.listeOption,
+		animation = animationToUpdate; 
+
+		factAnimations.update(id_animation, {
+			libelle : $scope.animation.libelle,
+			place_dispo : $scope.animation.place_dispo,
+			description : $scope.animation.description,
+			place_max  : $scope.animation.place_max,
+			heure_debut : $scope.animation.heureDebut,
+			heure_fin : $scope.animation.heure_fin,
+			liste_option : $scope.animation.listeOption,
 		}).success(function(){
 
 			//réactualisation du tableau comprenant nos animations
 			//pas la meilleure methode, il faudrait trouver mieux
-			$scope.animations = animations.animations;
+			$scope.animations = factAnimations.animations;
 		});
 	};
 }])
