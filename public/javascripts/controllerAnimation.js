@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', '$q', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
-function($scope, $q, auth, fileUpload, factAnimations, factOption) {
+.controller('controllerAnimation', ['$scope', '$filter', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
+function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -11,7 +11,7 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 	$scope.optionss = factOption.options;
 
 	$scope.option_in_animation = [
-		{'titre' : 'lalalala'}
+
 	];
 
 
@@ -25,67 +25,58 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 	//retourne l'user courant
 	$scope.user = auth.currentUser;
 
+
+
 	$scope.addCheckOption = function(id_option){
 
+		//contient tous les idoption des options ajoutée
+
+		var found = $filter('getById')($scope.option_in_animation, id_option);
+
+		console.log(found);
+
 		//on retire
-		if($scope.checked_options.indexOf(id_option) !== -1)
+		if(found != null)
 		{
-			var index_in_array = $scope.checked_options.indexOf(id_option);
-			$scope.checked_options.splice(index_in_array, 1);
+
+			var index_in_array = $scope.option_in_animation.indexOf(found);
+			$scope.option_in_animation.splice(index_in_array, 1);
 		}
 		//on ajoute
 		else 
 		{
-			$scope.checked_options.push(id_option);
+			var option = factOption.getOne(id_option);
+			option.then(function(result){
+				
+				$scope.option_in_animation.push(
+					{
+						'idoption' : id_option,
+						'option' : result.data
+					}
+				);
+			});
+
+			
+			
 		}
 	}
 
-	$scope.fillOptionsInAnimation = function(){
-		for (var i = 0 ; i < $scope.checked_options.length; i++) {
-			console.log($scope.checked_options[i]);
-
-			var option = factOption.getOne($scope.checked_options[i]);
-			option.then(function(result){
-				
-				var object = {
-					'titre' : result.data.titre
-					//description : result.data.description
-				};
-
-				console.log(object);
-				$scope.option_in_animation.push(object);
-			})
-		};
-
-		//on créer et ajoute les options dans le scope option
-		/*angular.forEach($scope.checked_options, function(value){
-			var option = factOption.getOne(value);
-
-			option.then(function(result){
-				
-				var object = {
-					'titre' : result.data.titre
-					//description : result.data.description
-				};
-
-				console.log(object);
-				$scope.option_in_animation.push(object);
-			})
-			//$scope.option_in_animation.push();
-		});*/
-	}
+	
 
 
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
 		
-		fillOptionsInAnimation();
-		
+		//on met toute les option de option_in_animation dans un tableau
+		var tab = [];
+		angular.forEach($scope.option_in_animation, function(value){
+			tab.push(value.option);
+		});
 
-		console.log($scope.option_in_animation);
-	
-	//	return;
+		console.log(tab);
+
+		return;
 
 		if ($scope.libelle === '') {
 			return;
@@ -102,6 +93,7 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 			liste_options : $scope.option_in_animation
 
 		}).success(function(animation){
+			console.log($scope.option_in_animation);
 			$scope.animations.push(animation);
 		});
 
@@ -166,6 +158,21 @@ function($scope, $q, auth, fileUpload, factAnimations, factOption) {
 		});
 	};
 }])
+
+.filter('getById', function() {
+  return function(input, id) {
+  	// console.log("searching for " + id  + " in ");
+  	// console.log(input);
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (input[i].idoption == id) {
+        return input[i];
+      }
+    }
+    return null;
+  }
+})
+
 
 
 
