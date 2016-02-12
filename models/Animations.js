@@ -19,4 +19,14 @@ var AnimationsSchema = new mongoose.Schema({
 	]
 });
 
+AnimationsSchema.methods.decrPlaceDispo = function(a){
+	this.place_dispo -= 1;
+	this.save(a);
+}
+
+AnimationsSchema.methods.incrPlaceDispo = function(a){
+	this.place_dispo += 1;
+	this.save(a);
+}
+
 mongoose.model('Animation', AnimationsSchema);

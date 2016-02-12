@@ -25,6 +25,18 @@ input, textarea{
 	margin-bottom: 15px;
 }
 
+.option_row{
+    margin-bottom: 15px;
+}
+
+.btn-suppr{
+    color: red;
+    float: right;
+    border: 1px solid red;
+    padding: 3px;
+    border-radius: 7px;
+}
+
 .ajout-options{
  background-color: rgba(0, 188, 212, 0.2);
  margin-bottom: 15px;

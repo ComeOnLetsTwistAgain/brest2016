@@ -5,9 +5,9 @@
 <div class="col-md-6">
 	<h2>Liste des options</h2>
 
-	<div ng-repeat="o in optionss">
+	<div ng-repeat="o in optionss" class="row option_row">
   		<div class="col-md-6">{{o.titre}} - {{o.description}}</div> 
-      <div class="col-md-6"><a class="btn btn-danger" href="#" ng-click="deleteOption($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a></div>
+      <div class="col-md-6"><a class="btn-suppr" href="#" ng-click="deleteOption($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a></div>
 	</div>
 </div>
 <div class="col-md-6">

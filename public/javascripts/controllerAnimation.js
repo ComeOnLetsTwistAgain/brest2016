@@ -146,6 +146,9 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			nbPlaceReserve : $scope.nbPlaceReserve,
 			listOptions : tab
 		}).then(function(){
+
+			
+
 			$scope.nbPlaceReserve  = '';
 			$state.go('home');
 		});
