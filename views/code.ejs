@@ -1,6 +1,6 @@
 <div>
 	<div ng-show="error" class="alert alert-danger">
-	  <strong>ERREUR</strong> - Le code rentré n'est pas valide
+	  <strong>ERREUR</strong> - {{error}}
 	</div>
 
 	<form ng-submit="checkCode()" style="margin-top:30px;">
@@ -12,8 +12,5 @@
 
     	<button type="submit" class="btn btn-primary">Accéder au site</button>
   	</form>
-  	{{success}}
-  	{{failed}}
-  	{{formData}}
 
 </div>
