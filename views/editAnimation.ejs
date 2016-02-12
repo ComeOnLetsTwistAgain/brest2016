@@ -5,28 +5,24 @@
 
   	<h2>Modifier une animation </h2>
 
-    {{animation._id}}
-
-  	<form ng-submit="updateAnimation()" style="margin-top:30px;">
+  	<form ng-submit="updateAnimation(animation._id)" style="margin-top:30px;">
 
     	<div class="form-group">
-          <input type="text" class="form-control" placeholder="Libelle" ng-model="libelle" ng-required="true"></input>
+          <input type="text" class="form-control" placeholder="Libelle" ng-model="animation.libelle" ng-required="true"></input>
 
-      		<textarea placeholder="Description" class="form-control" ng-model="description"></textarea>
+      		<textarea placeholder="Description" class="form-control" ng-model="animation.description"></textarea>
 
           <!-- Image de présentation : 
           <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile"> -->
           
 
-      		<input type="text" class="form-control" placeholder="Nombre de place max" ng-model="place_max"></input>
-      		<input type="text" class="form-control" placeholder="Heure de début" ng-model="heureDebut"></input>
-      		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input>
+      		<input type="text" class="form-control" placeholder="Nombre de place max" ng-model="animation.place_max"></input>
+      		<input type="text" class="form-control" placeholder="Heure de début" ng-model="animation.heure_debut"></input>
+      		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="animation.heure_fin"></input>
     	</div>
 
     	<button type="submit" class="btn btn-primary">Modifier</button>
 
   	</form>
-
-
 
   </form>

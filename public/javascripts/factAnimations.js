@@ -36,6 +36,15 @@ angular.module('brest.factAnimations', [])
 		});
 	};
 
+	o.update = function(id_animation, animation)
+	{
+		return $http.post('/animations/' + id_animation,  {
+	    	headers: {Authorization: 'Bearer '+auth.getToken()}
+	  	}).success(function(data){
+	    	o.animations.push(data);
+	  	});
+	};
+
 	/*end methodes*/
 
 	return o;
