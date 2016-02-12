@@ -1,22 +1,44 @@
 angular.module('brest.controllerCode', [])
 
-.controller('controllerCode', ['$scope', '$state' 'auth', 'code', 
-function($scope, $state, auth, code) {
+.controller('controllerCode', ['$scope', '$filter', '$location', 'auth', 
+function($scope, $filter, $location, auth, code) {
 
-	$scope.validCode = function(){
-		if ($scope.code =''){
+	$scope.currentPath = $location.path();
+	$scope.formData = {};
+
+	
+	$scope.codes = [
+
+		'12345',
+		'ABCDE',
+		'67890',
+		'FGHIJ'
+
+	];
+
+
+	$scope.checkCode = function(){
+		if ($scope.theCode =''){
 			return;
 		}
 
-		code.validCode({
-			code : $scope.code
-		}).error(function(error){
-			$scope.error = error;
-		}).then(function(){
-			$state.go('home');
-		})
-		success(function(){
+		var found = $filter('getById')($scope.codes, $scope.formData.code);
 
-		});
+		console.log(found);
+		
+
+		
 	}
-}]);
+}])
+
+.filter('getById', function() {
+  return function(input, id) {
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (+input[i] == +id) {
+        return input[i];
+      }
+    }
+    return null;
+  }
+});

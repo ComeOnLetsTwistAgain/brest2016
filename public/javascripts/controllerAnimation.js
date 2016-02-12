@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', '$filter', 'auth', 'factAnimations', 'factOption', 
-function($scope, $filter	, auth, factAnimations, factOption) {
+.controller('controllerAnimation', ['$scope', '$filter', '$state',  'auth', 'factAnimations', 'factOption', 'factReservations',
+function($scope, $filter	, $state, auth, factAnimations, factOption, factReservations) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -13,13 +13,18 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 	$scope.option_in_animation = [];
 	$scope.checkboxes = [];
 
+	$scope.option_in_reservation = [];
+	$scope.checkboxesReservation = [];
+
 
 
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant
-	$scope.user = auth.currentUser;
+	$scope.user = auth.currentUser();
+
+	
 
 
 
@@ -52,6 +57,37 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 					}
 				);
 			});
+		}
+	}
+
+	$scope.addCheckOptionReservation = function(id_option){
+		//contient tous les idoption des options ajoutée
+
+		var found = $filter('getById')($scope.option_in_reservation, id_option);
+
+		console.log($scope.checkboxesReservation);
+		
+
+		//on retire
+		if(found != null)
+		{
+
+			var index_in_array = $scope.option_in_reservation.indexOf(found);
+			$scope.option_in_reservation.splice(index_in_array, 1);
+		}
+		//on ajoute
+		else 
+		{
+			var option = factOption.getOne(id_option);
+			option.then(function(result){
+				
+				$scope.option_in_reservation.push(
+					{
+						'idoption' : id_option,
+						'option' : result.data
+					}
+				);
+			});
 
 			
 			
@@ -59,8 +95,6 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 	}
 
 	
-
-
 	//ajouter une animation
 	$scope.addAnimation = function(){
 
@@ -87,21 +121,35 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 
 		}).success(function(animation){
 			$scope.animations.push(animation);
-		});
-
-		//clear the values
+			//clear the values
 		$scope.libelle = '';
 		//$scope.place_debut = '';
 		$scope.place_max  = '';
 		$scope.heureDebut = '';
 		$scope.heureFin = '';
 		$scope.description = '';
-		//on uncheck toute les boxes
-
-		angular.forEach($scope.checkboxes, function (item) {
-            console.log(item);
-        });
+		}).then(function(){
+			$state.go('home');
+		});
 	};
+
+	//ajouter une réservation
+	$scope.addReservation = function(){
+		var tab = [];
+		angular.forEach($scope.option_in_reservation, function(value){
+			tab.push(value.option);
+		});
+
+		factReservations.create({
+			libelle_animation : $scope.animation.libelle,
+			user : $scope.user,
+			nbPlaceReserve : $scope.nbPlaceReserve,
+			listOptions : tab
+		}).then(function(){
+			$scope.nbPlaceReserve  = '';
+			$state.go('home');
+		});
+	}
 
 	//supprimer une animation
 	$scope.deleteAnimation = function(index_in_scope){

@@ -1,10 +1,12 @@
 var app = angular.module('brest', ['ui.router', 
-	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 
+	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 'brest.factReservations', 'brest.controllerReservation', 
 
-	'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllers']);
+	'brest.controllerNav', 'brest.controllerCode', 'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllers']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
+
+
 
 	$stateProvider.state('home', {
 		url : '/home',
@@ -34,6 +36,12 @@ function($stateProvider, $urlRouterProvider) {
 		url : '/admin',
 		templateUrl : '/admin.html',
 		controller : 'AdminCtrl'
+	})
+
+	.state('code', {
+		url: '/code',
+		templateUrl: '/code.html',
+		controller: 'controllerCode'
 	})
 
 	.state('addAnimation', {
@@ -88,6 +96,18 @@ function($stateProvider, $urlRouterProvider) {
 				return factAnimations.getReservationPage($stateParams.id);
 			}]
 
+		}
+	})
+
+	.state('mes_reservations', {
+		url : '/mes_reservations',
+		templateUrl:'/mes_reservations.html',
+		controller : 'controllerReservation',
+		resolve : {
+			reservations : ['factReservations',
+			function(factReservations) {
+				return factReservations.getAll();
+			}]
 		}
 	})
 

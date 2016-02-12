@@ -1,11 +1,19 @@
 var mongoose = require('mongoose');
 
 var ReservationsSchema = new mongoose.Schema({
-	//id_reservation: {type: Number, unique: true},
-	utilisateur: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-	nb_place_reservee: Number,
-	animation: { type: mongoose.Schema.Types.ObjectId, ref: 'Animation' },
-	liste_options: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Option' }]
+	//id_animation : {type: Number, unique: true},
+	libelle_animation: String,
+	user:String,
+	nom_image : String,
+	nbPlaceReserve : Number,
+	listeOptions: [
+		{
+			_id : String,
+			titre : String,
+			description : String,
+			__v : Number
+		}
+	]
 });
 
 mongoose.model('Reservation', ReservationsSchema);

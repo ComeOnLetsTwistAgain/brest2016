@@ -1,33 +1,19 @@
 angular.module('brest.controllerReservation', [])
 
-.controller('controllerReservation', ['$scope', 'auth', 'reservations', 
-function($scope, auth, reservation) {
+.controller('controllerReservation', ['$scope', 'auth', 'factReservations', 
+function($scope, auth, factReservations) {
 
 	//on récupère toutes les réservations présentes en base
-	$scope.reservations = reservations.reservations;
+	$scope.reservations = factReservations.reservations;
 
+	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
 
 	//retourne l'user courant
-	$scope.user = auth.currentUser;
+	$scope.user = auth.currentUser();
 
-	//fonction pour créer une réservations
-	$scope.addReservation = function(){
-		if ($scope.animation === '') {
-			return;
-		}
-		reservations.create({
-			animation : $scope.animation,
-			user : $scope.user,
-			nbPlaceReservee : $scope.nbPlaceReservee, 
-			listeOptions : $scope.listeOption,
-		});
-		//clear the values
-		$scope.animation = '';
-		$scope.listeUsers = '';
-		$listeOptions  = '';
-	};
 
+	console.log($scope.reservations);
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(id_reservation){
 		if (id_reservation === ''){
@@ -55,5 +41,5 @@ function($scope, auth, reservation) {
 			//pas la meilleure methode, il faudrait trouver mieux
 			$scope.reservations = reservations.reservations;
 		})
-	}
-});
+	};
+}]);

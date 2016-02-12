@@ -2,9 +2,19 @@
 	<h1>BREST 2016</h1>
 </div>
 
-<h2>{{animation.libelle}}</h2>
+<h2>Réservation pour l'animation {{animation.libelle}}</h2>
 
 <form ng-submit="addReservation()" style="margin-top:30px;">
+	
+	<input type="text" class="form-control"  ng-model="user" disabled="disabled"></input>
+	<input type="text" class="form-control" placeholder="Nombre de place souhaité" ng-model="nbPlaceReserve"></input>
+	<h3>Option(s) souhaitée(s)</h3>
+      <div class="col-md-12 ajout-options">
+        <div ng-repeat="o in animation.liste_options">
+          <input type="checkbox" ng-model="checkboxesReservation.selected" ng-change="addCheckOptionReservation(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}<label>
+        </div>
+      </div>
+
 	<button type="submit" class="btn btn-primary">Réserver cette animation</button>
 </form>
 
