@@ -1,10 +1,10 @@
 angular.module('brest.controllerReservation', [])
 
-.controller('controllerReservation', ['$scope', 'auth', 'reservations', 
-function($scope, auth, reservation) {
+.controller('controllerReservation', ['$scope', 'auth', 'factReservations', 
+function($scope, auth, factReservations) {
 
 	//on récupère toutes les réservations présentes en base
-	$scope.reservations = reservations.reservations;
+	$scope.reservations = factReservations.reservations;
 
 	$scope.isLoggedIn = auth.isLoggedIn;
 
@@ -17,9 +17,9 @@ function($scope, auth, reservation) {
 			return;
 		}
 		reservations.create({
-			animation : $scope.animation,
+			libelle_animation : $scope.libelle_animatio,
 			user : $scope.user,
-			nbPlaceReservee : $scope.nbPlaceReservee, 
+			nbPlaceReserve : $scope.nbPlaceReservee, 
 			listeOptions : $scope.listeOption,
 		});
 		//clear the values
@@ -55,5 +55,5 @@ function($scope, auth, reservation) {
 			//pas la meilleure methode, il faudrait trouver mieux
 			$scope.reservations = reservations.reservations;
 		})
-	}
-});
+	};
+}]);

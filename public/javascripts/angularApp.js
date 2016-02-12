@@ -1,5 +1,5 @@
 var app = angular.module('brest', ['ui.router', 
-	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 
+	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 'brest.factReservations', 'brest.controllerReservation', 
 
 	'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllers']);
 
@@ -70,6 +70,18 @@ function($stateProvider, $urlRouterProvider) {
 				return animations.get($stateParams.id);
 			}]
 
+		}
+	})
+
+	.state('mes_reservations', {
+		url : '/mes_reservations',
+		templateUrl:'/mes_reservations.html',
+		controller : 'controllerReservation',
+		resolve : {
+			reservations : ['factReservations',
+			function(factReservations) {
+				return factReservations.getAll();
+			}]
 		}
 	})
 
