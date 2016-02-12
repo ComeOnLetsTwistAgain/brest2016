@@ -4,10 +4,27 @@
 
 <h2>Réservation pour l'animation {{animation.libelle}}</h2>
 
-<form ng-submit="addReservation()" style="margin-top:30px;">
+<form class="form-horizontal" ng-submit="addReservation()" style="margin-top:30px;">
 	
-	<input type="text" class="form-control"  ng-model="user" disabled="disabled"></input>
-	<input type="text" class="form-control" placeholder="Nombre de place souhaité" ng-model="nbPlaceReserve"></input>
+	<div class="form-group">
+    	<label for="utilisateur" class="col-sm-2 control-label">Utilisateur</label>
+    	<div class="col-sm-10">
+      		<input type="text" class="form-control"  id="utilisateur" placeholder="utilisateur" ng-model="user" disabled="disabled"></input>
+    	</div>
+  	</div>
+	<div class="form-group">
+    	<label for="nbplacedispo" class="col-sm-2 control-label">Places disponible</label>
+    	<div class="col-sm-10">
+      		<input type="text" class="form-control"  id="nbplacedispo" placeholder="nombre places disponible" ng-model="animation.place_dispo" disabled="disabled"></input>
+    	</div>
+  	</div>	
+  	<div class="form-group">
+    	<label for="nbplacesouhaitee" class="col-sm-2 control-label">Places souhaitées</label>
+    	<div class="col-sm-10">
+      		<input type="text" class="form-control"  id="nbplacesouhaitee" placeholder="Nombre de places souhaitées" ng-model="nbPlaceReserve"></input>
+    	</div>
+  	</div>	
+
 	<h3>Option(s) souhaitée(s)</h3>
       <div class="col-md-12 ajout-options">
         <div ng-repeat="o in animation.liste_options">
@@ -17,4 +34,28 @@
 
 	<button type="submit" class="btn btn-primary">Réserver cette animation</button>
 </form>
+<!--
+<form class="form-horizontal" >
 
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+  </div>
+</form>
+-->

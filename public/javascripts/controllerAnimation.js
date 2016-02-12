@@ -227,6 +227,7 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			liste_options : tab,
 		}).success(function(){
 
+		$scope.success = "OK";
 		//réactualisation du tableau comprenant nos animations
 		//pas la meilleure methode, il faudrait trouver mieux
 		$scope.animations = factAnimations.animations;
