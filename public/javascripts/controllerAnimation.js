@@ -75,7 +75,7 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 		console.log(tab);
 
-		return;
+		
 
 		if ($scope.libelle === '') {
 			return;
@@ -167,9 +167,9 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 			place_dispo : $scope.animation.place_dispo,
 			description : $scope.animation.description,
 			place_max  : $scope.animation.place_max,
-			heure_debut : $scope.animation.heureDebut,
+			heure_debut : $scope.animation.heure_debut,
 			heure_fin : $scope.animation.heure_fin,
-			liste_option : $scope.animation.listeOption,
+			//liste_option : $scope.animation.listeOption,
 		}).success(function(){
 
 			//réactualisation du tableau comprenant nos animations

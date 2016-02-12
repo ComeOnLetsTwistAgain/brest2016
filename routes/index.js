@@ -244,10 +244,24 @@ router.get('/animations/:id/edit', function(req, res, next) {
   });
 });
 
+// router.get('/options/:id', function(req, res, next) {
+//   option_model.findById(req.params.id, function(err, option) {
+//     if(err) { return next(err);}
+//     if(!option) { return res.send(404);}
+   
+//     return res.json(option);
+//   });
+// });
+
 
 router.put('/animations/:id', function(req, res, next) {
+  
+  
   Animation.findById(req.params.id, function(err, animation) {
-    console.log(req.body.libelle);
+    
+    animation.libelle = req.body.animation.libelle;
+
+
     animation.save(function (err) {
       if (err) return handleError(err);
       res.send(animation);

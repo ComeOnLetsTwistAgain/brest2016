@@ -38,8 +38,9 @@ angular.module('brest.factAnimations', [])
 
 	o.update = function(id_animation, animation)
 	{
-		return $http.post('/animations/' + id_animation,  {
-	    	headers: {Authorization: 'Bearer '+auth.getToken()}
+		return $http.put('/animations/' + id_animation ,   {
+	    	headers: {Authorization: 'Bearer '+auth.getToken()},
+	    	animation : animation
 	  	}).success(function(data){
 	    	o.animations.push(data);
 	  	});

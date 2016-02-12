@@ -11,6 +11,7 @@ var AnimationsSchema = new mongoose.Schema({
 	heure_fin : String, 
 	liste_options: [
 		{
+			id : String,
 			titre : String
 		}
 	]
