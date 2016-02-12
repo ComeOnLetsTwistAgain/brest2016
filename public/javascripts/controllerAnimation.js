@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', '$filter', 'auth', 'fileUpload', 'factAnimations', 'factOption', 
-function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
+.controller('controllerAnimation', ['$scope', '$filter', 'auth', 'factAnimations', 'factOption', 
+function($scope, $filter	, auth, factAnimations, factOption) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -79,7 +79,7 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 			libelle : $scope.libelle,
 			description : $scope.description,
 			//nom_image : $scope.image.name,
-			//place_dispo : $scope.place_dispo,
+			place_dispo : $scope.place_max,
 			place_max  : $scope.place_max,
 			heure_debut : $scope.heureDebut,
 			heure_fin : $scope.heureFin,
@@ -178,8 +178,6 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 .filter('getById', function() {
   return function(input, id) {
-  	// console.log("searching for " + id  + " in ");
-  	// console.log(input);
     var i=0, len=input.length;
     for (; i<len; i++) {
       if (input[i].idoption == id) {
@@ -193,36 +191,36 @@ function($scope, $filter	, auth, fileUpload, factAnimations, factOption) {
 
 
 
-.service('fileUpload', ['$http', function ($http) {
-            this.uploadFileToUrl = function(file, uploadUrl){
-               var fd = new FormData();
-               fd.append('file', file);
+// .service('fileUpload', ['$http', function ($http) {
+//             this.uploadFileToUrl = function(file, uploadUrl){
+//                var fd = new FormData();
+//                fd.append('file', file);
             
-               $http.post(uploadUrl, fd, {
-                  transformRequest: angular.identity,
-                  headers: {'Content-Type': undefined}
-               })
+//                $http.post(uploadUrl, fd, {
+//                   transformRequest: angular.identity,
+//                   headers: {'Content-Type': undefined}
+//                })
             
-               .success(function(){
-               })
+//                .success(function(){
+//                })
             
-               .error(function(){
-               });
-            }
-         }])
+//                .error(function(){
+//                });
+//             }
+//          }])
 
-.directive('fileModel', ['$parse', function ($parse) {
-            return {
-               restrict: 'A',
-               link: function(scope, element, attrs) {
-                  var model = $parse(attrs.fileModel);
-                  var modelSetter = model.assign;
+// .directive('fileModel', ['$parse', function ($parse) {
+//             return {
+//                restrict: 'A',
+//                link: function(scope, element, attrs) {
+//                   var model = $parse(attrs.fileModel);
+//                   var modelSetter = model.assign;
                   
-                  element.bind('change', function(){
-                     scope.$apply(function(){
-                        modelSetter(scope, element[0].files[0]);
-                     });
-                  });
-               }
-            };
-         }]);
+//                   element.bind('change', function(){
+//                      scope.$apply(function(){
+//                         modelSetter(scope, element[0].files[0]);
+//                      });
+//                   });
+//                }
+//             };
+//          }]);
