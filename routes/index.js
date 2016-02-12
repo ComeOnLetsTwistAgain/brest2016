@@ -273,7 +273,13 @@ router.put('/animations/:id', function(req, res, next) {
   Animation.findById(req.params.id, function(err, animation) {
     
     animation.libelle = req.body.animation.libelle;
-
+    animation.description = req.body.animation.description;
+    animation.nom_image = req.body.animation.nom_image;
+    animation.place_dispo = req.body.animation.place_dispo;
+    animation.place_max = req.body.animation.place_max;
+    animation.heure_debut = req.body.animation.heure_debut;
+    animation.heure_fin = req.body.animation.heure_fin;
+    animation.liste_options = req.body.animation.liste_options;
 
     animation.save(function (err) {
       if (err) return handleError(err);

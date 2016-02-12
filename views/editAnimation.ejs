@@ -16,13 +16,19 @@
           <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile"> -->
           
 
-      		<input type="text" class="form-control" placeholder="Nombre de place max" ng-model="animation.place_max"></input>
+      		<input type="number" class="form-control" placeholder="Nombre de place max" ng-model="animation.place_max"></input>
       		<input type="text" class="form-control" placeholder="Heure de début" ng-model="animation.heure_debut"></input>
       		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="animation.heure_fin"></input>
     	</div>
 
+      <h3>Modification des options choisies</h3>
+      <div class="col-md-12 ajout-options">
+        <div ng-repeat="o in optionss">
+          <input type="checkbox" ng-model="checkboxes" ng-change="addCheckOption(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}</label>
+        </div>
+      </div>
+
     	<button type="submit" class="btn btn-primary">Modifier</button>
-
   	</form>
-
+    
   </form>

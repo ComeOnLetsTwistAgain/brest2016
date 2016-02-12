@@ -69,6 +69,10 @@ function($stateProvider, $urlRouterProvider) {
 		animation : ['$stateParams', 'factAnimations',
 			function($stateParams, factAnimations) {
 				return factAnimations.getOne($stateParams.id);
+			}],
+		options : ['$stateParams', 'factOption',
+			function($stateParams, factOption){
+				return factOption.getAll();
 			}]
 
 		}

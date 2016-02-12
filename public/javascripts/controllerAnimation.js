@@ -150,12 +150,22 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 
 	//modifier une animation
 	$scope.updateAnimation = function(id_animation){
+		
+		//on met toute les option de option_in_animation dans un tableau
+		//qu'on passe après en paramêtre a liste_options
+		var tab = [];
+		angular.forEach($scope.option_in_animation, function(value){
+			tab.push(value.option);
+		});
+
 		if (id_animation === ''){
 			return;
 		}
 		var animationToUpdate = $scope.animations[id_animation]; // recupère notre animation
 
 		console.log("Animation a modifier "+ id_animation);
+		console.log("contenu de tab");
+		console.log(tab);
 		
 		animation = animationToUpdate; 
 
@@ -166,12 +176,17 @@ function($scope, $filter	, auth, factAnimations, factOption) {
 			place_max  : $scope.animation.place_max,
 			heure_debut : $scope.animation.heure_debut,
 			heure_fin : $scope.animation.heure_fin,
-			//liste_option : $scope.animation.listeOption,
+			liste_options : tab,
 		}).success(function(){
 
-			//réactualisation du tableau comprenant nos animations
-			//pas la meilleure methode, il faudrait trouver mieux
-			$scope.animations = factAnimations.animations;
+		//réactualisation du tableau comprenant nos animations
+		//pas la meilleure methode, il faudrait trouver mieux
+		$scope.animations = factAnimations.animations;
+
+		angular.forEach($scope.checkboxes, function (item) {
+            console.log(item);
+        });
+
 		});
 	};
 }])
