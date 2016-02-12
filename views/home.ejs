@@ -25,16 +25,17 @@
           <h4>Options disponibles</h4>
           <div class="col-md-12 ajout-options">
             <div ng-repeat="o in a.liste_options">
-              {{o}}
+              {{o.titre}}
             </div>
           </div>
           <br/><br/>
           <!-- ADMIN PART -->
-          <div class="col-md-12" ng-show="isAdmin()">
+          <div class="col-md-4">
             <a class="btn btn-primary" href="/#/animations/{{a._id}}">Réserver <span class="glyphicon glyphicon-ok"></span></a>
-            <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a>
+          </div>
+          <div class="col-md-8" ng-show="isAdmin()">
             <a class="btn btn-warning" href="/#/animations/{{a._id}}/edit">Modifier <span class="glyphicon glyphicon-pencil"></span></a>
-
+            <a class="btn btn-danger" href="#" ng-click="deleteAnimation($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a>
           </div>
       </div>
   </div>
