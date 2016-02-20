@@ -1,7 +1,7 @@
 angular.module('brest.factAuth', [])
 
-.factory('auth', ['$http','$location', '$window',
-function($http, $location, $window) {
+.factory('auth', ['$http', '$rootScope','$location', '$window',
+function($http, $rootScope, $location, $window) {
 	var auth = {};
 
 	auth.saveToken = function(token) {
@@ -21,9 +21,12 @@ function($http, $location, $window) {
 	auth.isLoggedIn = function() {
 		var token = auth.getToken();
 
+		//if the user is logged in
 		if (token) {
-			var payload = JSON.parse($window.atob(token.split('.')[1]));
 
+
+
+			var payload = JSON.parse($window.atob(token.split('.')[1]));
 			return payload.exp > Date.now() / 1000;
 		} else {
 			return false;
@@ -57,6 +60,7 @@ function($http, $location, $window) {
 
 	auth.logOut = function() {
 		$window.localStorage.removeItem('brest-token');
+		$rootScope.$broadcast('auth:logout');
 	};
 
 	return auth;

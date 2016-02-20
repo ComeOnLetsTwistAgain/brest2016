@@ -1,7 +1,7 @@
 angular.module('brest.controllerCode', [])
 
-.controller('controllerCode', ['$scope', '$filter', '$state', '$location', 'auth', 
-function($scope, $filter, $state, $location, auth, code) {
+.controller('controllerCode', ['$scope', '$rootScope', '$filter', '$state', '$location', 'auth', 
+function($scope, $rootScope, $filter, $state, $location, auth, code) {
 
 	$scope.currentPath = $location.path();
 	$scope.formData = {};
@@ -22,12 +22,12 @@ function($scope, $filter, $state, $location, auth, code) {
 			return;
 		}
 
-		var found = $filter('getById')($scope.codes, $scope.formData.code);
+		var notfound = false;
 
 		for (var i = 0; i <= $scope.codes.length; i++) {
-			console.log($scope.codes[i]);
+			
 			if($scope.formData.code === $scope.codes[i]){
-				$state.go("home");
+				$rootScope.$broadcast('code:correct');
 			} else {
 				$scope.error = 'Le code rentré n\'est pas correct';
 			}

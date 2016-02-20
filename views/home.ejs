@@ -31,7 +31,7 @@
           </div>
           <br/><br/>
           <!-- ADMIN PART -->
-          <div class="col-md-4">
+          <div class="col-md-4" ng-show="isLoggedIn()">
             <a class="btn btn-primary" href="/#/animations/{{a._id}}">Réserver <span class="glyphicon glyphicon-ok"></span></a>
           </div>
           <div class="col-md-8" ng-show="isAdmin()">
@@ -85,5 +85,5 @@
 
 
 <div ng-hide="isLoggedIn()">
-  <h3>Vous devez être <a href="/#/login">enregistré</a> ou <a href="/#/register">inscrit</a> avant de pouvoir réserver une animation</h3>
+  <h3>Vous devez être <a href="/#/login">enregistré</a> avant de pouvoir réserver une animation</h3>
 </div>

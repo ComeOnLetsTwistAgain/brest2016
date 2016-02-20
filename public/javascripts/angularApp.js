@@ -1,7 +1,7 @@
 var app = angular.module('brest', ['ui.router', 
 	'brest.factAnimations', 'brest.factPosts', 'brest.factAuth', 'brest.factOption', 'brest.factReservations', 'brest.controllerReservation', 
 
-	'brest.controllerNav', 'brest.controllerCode', 'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllers']);
+	'brest.controllerNav', 'brest.controllerCode', 'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllerAuth']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
@@ -115,7 +115,7 @@ function($stateProvider, $urlRouterProvider) {
 	.state('login', {
 		url : '/login',
 		templateUrl : '/login.html',
-		controller : 'AuthCtrl',
+		controller : 'controllerAuth',
 		onEnter : ['$state', 'auth',
 		function($state, auth) {
 			if (auth.isLoggedIn()) {
@@ -128,7 +128,7 @@ function($stateProvider, $urlRouterProvider) {
 	.state('register', {
 		url : '/register',
 		templateUrl : '/register.html',
-		controller : 'AuthCtrl',
+		controller : 'controllerAuth',
 		onEnter : ['$state', 'auth',
 		function($state, auth) {
 			if (auth.isLoggedIn()) {
@@ -139,7 +139,59 @@ function($stateProvider, $urlRouterProvider) {
 	});
 
 	$urlRouterProvider.otherwise('code');
-}]);
+}])
+.run(function($rootScope, $state, auth){
+	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+
+		//console.log(fromState.name + ' => ' + toState.name);
+
+		/*
+		*	Si le user n'est pas connecté, il ne peut pas avoir accès qu'a login, register et code
+		*/
+		//TODO
+
+
+		/*
+		*	Si le user est deja connecté, il n'a plus accès a la view code
+		*/
+		var codeRedirect = toState.name === 'code' && auth.isLoggedIn();
+		if (codeRedirect) {
+			console.log('already logged in');
+			event.preventDefault();
+			$state.go('home');
+		}
+
+		/*
+		*	Si le user n'est pas admin, il n'a pas accès aux vues admin
+		*/
+		if(!auth.isAdmin()){
+			
+			if(
+			   toState.name === 'addAnimation' ||
+			   toState.name === 'addOption' ||
+			   toState.name === 'editAnimation'
+			  )
+			{
+				event.preventDefault();
+				$state.go('home');
+			}
+		}
+
+
+
+	});
+
+	$rootScope.$on('code:correct', function() {
+		if(auth.isLoggedIn())
+        	$state.go('home');
+        else
+        	$state.go('register');
+    });
+
+    $rootScope.$on('auth:logout', function() {
+        	$state.go('login');
+    });
+});
 
 
 
