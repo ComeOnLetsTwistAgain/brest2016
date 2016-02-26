@@ -15,6 +15,12 @@ angular.module('brest.factReservations', [])
 		});
 	};
 
+	o.getMyReservations = function(user){
+		return $http.get('/mes_reservations/' + user).success(function(data){
+			angular.copy(data, o.reservations);
+		});
+	};
+
 	o.create = function(reservation) {
 	  return $http.post('/reservations', reservation, {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}

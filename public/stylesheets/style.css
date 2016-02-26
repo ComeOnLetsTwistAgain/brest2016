@@ -58,3 +58,12 @@ input, textarea{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.row_reservation{
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.row_reservation .options{
+    border: 1px solid grey;
+}

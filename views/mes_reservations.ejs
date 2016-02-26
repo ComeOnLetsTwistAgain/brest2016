@@ -7,39 +7,19 @@
   <h2>Liste des réservations</h2>
 
 
+ 
 
-  <!--<div ng-repeat="a in animations" class="row animation" >
-      <div class="col-md-7">
-          <h3>{{a.libelle}}</h3>
-          <h4>{{a.description}}</h4>     
+<div class="row row_reservation" ng-repeat="r in reservations">
+    <div class="col-md-4">Libelle : {{r.libelle_animation}}</div>
+    <div class="col-md-4">Nombres de places : {{r.nbPlaceReserve}}</div>
+    <div class="col-md-4"><button class="btn btn-danger">Annuler</button></div>
 
-          <div class="col-md-12">
-            <span>Places disponibles : <b>{{a.place_max}}</b></span><br/>
-            <span>Début : <b>{{a.heure_debut}}</b> - Fin : <b>{{a.heure_fin}}</b></span>
-          </div>     
-          <br/><br/>
-          <h4>Options disponible</h4>
-          <div class="col-md-12 ajout-options">
-            
-          </div>
-          <br/><br/>
-          <!-- ADMIN PART 
-          <div class="col-md-12" ng-show="isAdmin()">
-            <a class="btn btn-danger" href="#" ng-click="deleteReservation($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a>
-            <a class="btn btn-warning" href="" >Modifier <span class="glyphicon glyphicon-pencil"></span></a>
-          </div>
-      </div>
-  </div>-->
+    <div class="col-md-12 options" ng-repeat="o in r.listeOptions">
+      {{o.titre}}
+    </div>
+</div>
 
-  <div>
-<table>
-	<tr ng-repeat = "r in reservations">
-		<td>{{r.libelle_animation}}</td>
-    <td>{{r.user}}</td>
-		<td>{{r.nbPlaceReserve}}</td>
-    <td>{{r.listeOptions}}</td>
-	</tr>
-  </div>
+
 
 
 

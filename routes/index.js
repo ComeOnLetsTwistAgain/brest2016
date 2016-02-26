@@ -329,6 +329,13 @@ router.get('/reservations', function(req, res, next) {
   });
 });
 
+router.get('/mes_reservations/:user', function(req, res, next){
+  Reservation.find({'user': req.params.user}, function(err, reservations){
+    if(err){ return next(err); } 
+    res.json(reservations);
+  })
+});
+
 
 // route pour la création d'une réservation 
 router.post('/reservations', auth, function(req, res, next) {

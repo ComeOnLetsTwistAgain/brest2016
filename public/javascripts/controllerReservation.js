@@ -12,8 +12,6 @@ function($scope, auth, factReservations) {
 	//retourne l'user courant
 	$scope.user = auth.currentUser();
 
-
-	console.log($scope.reservations);
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(id_reservation){
 		if (id_reservation === ''){

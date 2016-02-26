@@ -104,9 +104,9 @@ function($stateProvider, $urlRouterProvider) {
 		templateUrl:'/mes_reservations.html',
 		controller : 'controllerReservation',
 		resolve : {
-			reservations : ['factReservations',
-			function(factReservations) {
-				return factReservations.getAll();
+			reservations : ['$stateParams', 'factReservations', 'auth',
+			function($stateParams, factReservations, auth) {
+				return factReservations.getMyReservations(auth.currentUser());
 			}]
 		}
 	})

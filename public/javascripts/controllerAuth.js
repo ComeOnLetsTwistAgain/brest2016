@@ -1,8 +1,3 @@
-/**
-* controllerAuth Module
-*
-* Description
-*/
 angular.module('brest.controllerAuth', [])
 .controller('controllerAuth', ['$scope', '$state', 'auth',
 function($scope, $state, auth) {

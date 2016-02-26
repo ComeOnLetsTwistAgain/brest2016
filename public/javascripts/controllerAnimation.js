@@ -11,10 +11,8 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 	$scope.optionss = factOption.options;
 
 	$scope.option_in_animation = [];
-	$scope.checkboxes = [];
 
 	$scope.option_in_reservation = [];
-	$scope.checkboxesReservation = [];
 
 
 
@@ -26,8 +24,6 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 
 	
 	$scope.refreshAnimations = function(){
-		console.log("refreshing..");
-
 		factAnimations.getAll();
 	}
 
@@ -38,8 +34,6 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 		//contient tous les idoption des options ajoutée
 
 		var found = $filter('getById')($scope.option_in_animation, id_option);
-
-		console.log($scope.checkboxes);
 		
 
 		//on retire
@@ -69,8 +63,6 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 		//contient tous les idoption des options ajoutée
 
 		var found = $filter('getById')($scope.option_in_reservation, id_option);
-
-		console.log($scope.checkboxesReservation);
 		
 
 		//on retire
@@ -151,7 +143,7 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 			libelle_animation : $scope.animation.libelle,
 			user : $scope.user,
 			nbPlaceReserve : $scope.nbPlaceReserve,
-			listOptions : tab
+			listeOptions : tab
 		}).then(function(){
 
 			factReservations.decrPlacesDispo($scope.animation._id, $scope.nbPlaceReserve);
