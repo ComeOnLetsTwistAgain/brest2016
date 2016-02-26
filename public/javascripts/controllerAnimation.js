@@ -25,6 +25,11 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 	$scope.user = auth.currentUser();
 
 	
+	$scope.refreshAnimations = function(){
+		console.log("refreshing..");
+
+		factAnimations.getAll();
+	}
 
 
 
