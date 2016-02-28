@@ -203,7 +203,7 @@ router.get('/animations', function(req, res, next) {
     if(err){ 
       return next(err);
     }
-
+    console.log("lol");
     res.json(animations);
   });
 });

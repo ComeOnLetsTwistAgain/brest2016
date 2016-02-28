@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', [])
 
-.controller('controllerAnimation', ['$scope', '$filter', '$state',  'auth', 'factAnimations', 'factOption', 'factReservations',
-function($scope, $filter	, $state, auth, factAnimations, factOption, factReservations) {
+.controller('controllerAnimation', ['$scope', '$filter', '$state', 'auth', 'factAnimations', 'factOption', 'factReservations',
+function($scope, $filter, $state, auth, factAnimations, factOption, factReservations) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -241,6 +241,8 @@ function($scope, $filter	, $state, auth, factAnimations, factOption, factReserva
 
 		});
 	};
+
+
 }])
 
 .filter('getById', function() {
