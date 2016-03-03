@@ -10,8 +10,8 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//toutes les options
 	$scope.optionss = factOption.options;
 
+	//checkboxes des animations / reservations
 	$scope.option_in_animation = [];
-
 	$scope.option_in_reservation = [];
 
 
@@ -21,6 +21,10 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 
 	//retourne l'user courant
 	$scope.user = auth.currentUser();
+
+	//nb de reservations par défaut
+	$scope.nbPlaceReserve = 1;
+
 
 	
 	$scope.refreshAnimations = function(){
@@ -140,15 +144,19 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 		});
 
 		factReservations.create({
+			id_animation : $scope.animation._id,
 			libelle_animation : $scope.animation.libelle,
 			user : $scope.user,
 			nbPlaceReserve : $scope.nbPlaceReserve,
 			listeOptions : tab
 		}).then(function(){
 
-			factReservations.decrPlacesDispo($scope.animation._id, $scope.nbPlaceReserve);
+			factReservations.decrPlacesDispo($scope.animation._id, $scope.nbPlaceReserve).success(function(){
+				alert("Votre reservation est bien prise en compte, vous pouvez la consulter/annuler dans l'onglet \"Mes reservations\"");
+				$state.go('home');
+			});
 
-			$scope.nbPlaceReserve  = '';
+			//$scope.nbPlaceReserve  = '';
 			//$state.go('home');
 		});
 	}
@@ -235,9 +243,9 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 		//pas la meilleure methode, il faudrait trouver mieux
 		$scope.animations = factAnimations.animations;
 
-		angular.forEach($scope.checkboxes, function (item) {
+		/*angular.forEach($scope.checkboxes, function (item) {
             console.log(item);
-        });
+        });*/
 
 		});
 	};

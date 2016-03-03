@@ -17,19 +17,17 @@
     	</div>
     	<label for="nbplacesouhaitee" class="col-sm-2 control-label">Places souhaitées</label>
     	<div class="col-sm-10">
-      		<input type="text" class="form-control"  id="nbplacesouhaitee" placeholder="Nombre de places souhaitées" ng-model="nbPlaceReserve"></input>
+      		<input type="number" class="form-control"  id="nbplacesouhaitee" placeholder="Nombre de places souhaitées" ng-model="nbPlaceReserve" min="1" max="{{animation.place_dispo}}"></input>
     	</div>
   	</div>	
 
 	<h3>Option(s) souhaitée(s)</h3>
 
       <div class="col-md-12 ajout-options">
-        {{option_in_reservation}}
         <div ng-repeat="o in animation.liste_options">
           <input type="checkbox" ng-model="checkboxesReservation.selected" ng-change="addCheckOptionReservation(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}<label>
         </div>
       </div>
-
 	<button type="submit" class="btn btn-primary">Réserver cette animation</button>
 </form>
 <!--

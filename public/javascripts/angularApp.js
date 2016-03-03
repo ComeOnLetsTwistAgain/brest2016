@@ -143,23 +143,20 @@ function($stateProvider, $urlRouterProvider) {
 .run(function($rootScope, $state, auth){
 	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
 
-		console.log(fromState.name + ' => ' + toState.name);
+		//console.log(fromState.name + ' => ' + toState.name);
 
-		/*
-		*	Si le user n'est pas connecté, il ne peut pas avoir accès qu'a login, register et code
-		*/
-		//TODO
+		
 
 
 		/*
 		*	Si le user est deja connecté, il n'a plus accès a la view code
 		*/
-		var codeRedirect = toState.name === 'code' && auth.isLoggedIn();
+		/*var codeRedirect = toState.name === 'code' && auth.isLoggedIn();
 		if (codeRedirect) {
 			console.log('already logged in');
 			event.preventDefault();
 			$state.go('home');
-		}
+		}*/
 
 		/*
 		*	Si le user n'est pas admin, il n'a pas accès aux vues admin

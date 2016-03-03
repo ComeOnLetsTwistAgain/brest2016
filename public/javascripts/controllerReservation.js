@@ -12,17 +12,25 @@ function($scope, auth, factReservations) {
 	//retourne l'user courant
 	$scope.user = auth.currentUser();
 
+
+
 	//fonction de suppresion d'une réservation
-	$scope.deleteReservation = function(id_reservation){
-		if (id_reservation === ''){
-			return;
+	$scope.deleteReservation = function(index_in_scope){
+		var reservation = $scope.reservations[index_in_scope];
+		console.log('deleting - index : ' + index_in_scope + ' id : ' + reservation._id);
+		if (reservation._id === ''){return;}
+
+		var confirm = window.confirm("Voulez-vous vraiment annuler cette reservation ?");
+		if (confirm == true) {
+		    factReservations.delete(reservation._id).success(function(){
+				$scope.reservations.splice(index_in_scope, 1);
+
+				factReservations.incrPlacesDispo(reservation.id_animation, reservation.nbPlaceReserve);
+			});
 		}
 
-		reservations.delete({
-			id : id_reservation
-		}).success(function(){
-			$scope.reservations.delete($scope.reservations[id_reservation]);
-		});
+		
+
 
 	};
 

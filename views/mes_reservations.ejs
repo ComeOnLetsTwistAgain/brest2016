@@ -12,7 +12,7 @@
 <div class="row row_reservation" ng-repeat="r in reservations">
     <div class="col-md-4">Libelle : {{r.libelle_animation}}</div>
     <div class="col-md-4">Nombres de places : {{r.nbPlaceReserve}}</div>
-    <div class="col-md-4"><button class="btn btn-danger">Annuler</button></div>
+    <div class="col-md-4"><button class="btn btn-danger" ng-click="deleteReservation($index)">Annuler</button></div>
 
     <div class="col-md-12 options" ng-repeat="o in r.listeOptions">
       {{o.titre}}

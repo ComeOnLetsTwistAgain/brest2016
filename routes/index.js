@@ -203,7 +203,6 @@ router.get('/animations', function(req, res, next) {
     if(err){ 
       return next(err);
     }
-    console.log("lol");
     res.json(animations);
   });
 });
@@ -257,24 +256,32 @@ router.get('/animations/:id', function(req, res, next) {
   });
 });
 
-router.put('/animations/:id/decrPlaceDispo', auth, function(req, res, next) {
+router.put('/animations/:id/decrPlaceDispo',  function(req, res, next) {
   Animation.findById(req.params.id, function(err, animation){
     if(err){return next(err);}
     if(!animation) {return res.send(404);}
 
-    console.log("incrPlaceDispo by " + req.body.nbPlaces);
+    animation.decrPlaceDispo(function(err, animation){
+      if(err){return next(err);}
+      res.json(animation);
+    }, req.body.infos.nbPlaces);
     
   });
 });
 
-// router.get('/options/:id', function(req, res, next) {
-//   option_model.findById(req.params.id, function(err, option) {
-//     if(err) { return next(err);}
-//     if(!option) { return res.send(404);}
-   
-//     return res.json(option);
-//   });
-// });
+router.put('/animations/:id/incrPlaceDispo',  function(req, res, next) {
+  Animation.findById(req.params.id, function(err, animation){
+    if(err){return next(err);}
+    if(!animation) {return res.send(404);}
+
+    animation.incrPlaceDispo(function(err, animation){
+      if(err){return next(err);}
+      res.json(animation);
+    }, req.body.infos.nbPlaces);
+    
+  });
+});
+
 
 
 router.put('/animations/:id', function(req, res, next) {
@@ -329,7 +336,7 @@ router.get('/reservations', function(req, res, next) {
   });
 });
 
-router.get('/mes_reservations/:user', function(req, res, next){
+router.get('/mes_reservations/:user', auth, function(req, res, next){
   Reservation.find({'user': req.params.user}, function(err, reservations){
     if(err){ return next(err); } 
     res.json(reservations);
@@ -345,6 +352,18 @@ router.post('/reservations', auth, function(req, res, next) {
     if(err){ return next(err); }
 
     res.json(reservation);
+  });
+});
+
+router.delete('/reservations/:id/remove', auth, function(req, res, next){
+  Reservation.findById(req.params.id, function(err, reservation){
+    if(err){return next(err);}
+    if(!reservation){ return next(new Error("Can't find reservation"));}
+
+    reservation.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
   });
 });
 

@@ -2,7 +2,8 @@ angular.module('brest.factReservations', [])
 
 .factory('factReservations', ['$http', 'auth', function($http, auth){
 	var o = {
-		reservations : []
+		reservations : [],
+		animationReturned: {}
 	};
 
 
@@ -16,7 +17,9 @@ angular.module('brest.factReservations', [])
 	};
 
 	o.getMyReservations = function(user){
-		return $http.get('/mes_reservations/' + user).success(function(data){
+		return $http.get('/mes_reservations/' + user , {
+			headers: {Authorization: "Bearer " + auth.getToken() }
+		}).success(function(data){
 			angular.copy(data, o.reservations);
 		});
 	};
@@ -30,7 +33,9 @@ angular.module('brest.factReservations', [])
 	};
 
 	o.delete = function(id_reservation) {
-		return $http.delete('/reservations/'+ id_reservation + '/remove');
+		return $http.delete('/reservations/'+ id_reservation + '/remove', {
+			headers: {Authorization: 'Bearer '+auth.getToken()}
+		});
 	};
 
 	o.getOne = function(id_reservation){
@@ -42,21 +47,17 @@ angular.module('brest.factReservations', [])
 
 	o.decrPlacesDispo = function(id_animation, nbPlaces){
 		return $http.put('/animations/' + id_animation + '/decrPlaceDispo', {
-			headers: {Authorization: 'Bearer '+auth.getToken()}
+			headers: {Authorization: 'Bearer '+auth.getToken()},
+			infos: {"id_animation" : id_animation, "nbPlaces" : nbPlaces}
 	  	});
-	}
-		/*
-			o.get = function(id) {
-		//use the express route to grab this post and return the response
-		//from that route, which is a json of the post data
-		//.then is a promise, a kind of newly native thing in JS that upon cursory research
-		//looks friggin sweet; TODO Learn to use them like a boss.  First, this.
-		return $http.get('/posts/' + id).then(function(res) {
-			return res.data;
-		});
-	};*/
+	};
 
-	/*end methodes*/
+	o.incrPlacesDispo = function(id_animation, nbPlaces){
+		return $http.put('/animations/' + id_animation + '/incrPlaceDispo', {
+			headers: {Authorization: 'Bearer '+auth.getToken()},
+			infos: {"id_animation" : id_animation, "nbPlaces" : nbPlaces}
+	  	});
+	};
 
 	return o;
 }]);

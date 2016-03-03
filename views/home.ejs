@@ -10,6 +10,7 @@
 
 
   <div ng-repeat="a in animations" class="row animation" >
+    
       <div class="col-md-5 img_animation">
           <a href="#">
           </a>
@@ -34,7 +35,7 @@
           <br/><br/>
           <!-- ADMIN PART -->
           <div class="col-md-4" ng-show="isLoggedIn()">
-            <a class="btn btn-primary" href="/#/animations/{{a._id}}">Réserver <span class="glyphicon glyphicon-ok"></span></a>
+            <a class="btn btn-primary" href="/#/animations/{{a._id}}" ng-disabled="a.place_dispo == 0">Réserver <span class="glyphicon glyphicon-ok"></span></a>
           </div>
           <div class="col-md-8" ng-show="isAdmin()">
             <a class="btn btn-warning" href="/#/animations/{{a._id}}/edit">Modifier <span class="glyphicon glyphicon-pencil"></span></a>
