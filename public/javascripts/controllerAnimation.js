@@ -7,6 +7,11 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	$scope.animations = factAnimations.animations;
 	$scope.animation = factAnimations.animation;
 
+	//on construit les date des objet
+	$scope.animation.date = new Date($scope.animation.date);
+	$scope.animation.heure_debut = new Date ($scope.animation.heure_debut);
+	$scope.animation.heure_fin = new Date($scope.animation.heure_fin);
+
 	//toutes les options
 	$scope.optionss = factOption.options;
 
