@@ -1,51 +1,30 @@
 angular.module('brest.controllerOption', [])
 
-.controller('controllerOption', ['$scope', 'auth', 'factOption', 
-function($scope, auth, factOption) {	
+.controller('controllerOption', ['$scope', '$filter', 'auth', 'factOption', 
+function($scope, $filter, auth, factOption) {	
 
 	//on récupère toutes les options présentes en base
 	$scope.optionss = factOption.options;
 
 	//ajouter une option à la liste d'options
 	$scope.addOption = function(id_option){
-		if (id_option === ''){
-			return;
-		}
+		var trouve = $filter('getOptionsById')($scope.optionss, $scope.titre_option);
 
-		var trouve=false;
-
-		angular.forEach($scope.optionss, function(value){
-			console.log("-----");
-			console.log("value de l'option= "+value.titre);
-			console.log("value passé form = "+$scope.titre_option);
-			if ($scope.titre_option === value.titre && trouve !== true)
-			{
-				console.log("Option found");
-				$scope.error = 'Il existe déjà une option avec ce nom';
-				trouve = true;
-			} 	else {
-				console.log("Option non trouvée, création de l\'option")
-				trouve = false;				
-			}
-		});
-		
-
-		if (trouve === false)
+		if (trouve === null)
 		{
 			factOption.create({
 				titre : $scope.titre_option,
 				description : $scope.description_option,
-			}).success(function(option){
-				//$scope.optionss.push(option);
 			});
 
 			// remet les champs à vides
 			$scope.titre_option = "";
 			$scope.description_option = "";
 			$scope.error = "";
+		}else{
+			$scope.error = "Il existe déjà une option avec ce titre";
 		}
 
-		trouve = false;
 	};
 
 	//supprimer une option à la liste d'options
@@ -73,4 +52,16 @@ function($scope, auth, factOption) {
 			$scope.options = options.options;
 		})
 	}
-}]);
+}])
+
+.filter('getOptionsById', function() {
+  return function(input, titre) {
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (input[i].titre === titre) {
+        return input[i];
+      }
+    }
+    return null;
+  }
+});
