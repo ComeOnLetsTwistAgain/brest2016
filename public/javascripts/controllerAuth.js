@@ -25,9 +25,11 @@ function($scope, $state, auth) {
 	$scope.deleteUser = function(index_in_scope){
 		var u = $scope.users[index_in_scope];
 		if(u._id === ''){ return; }
-
-		auth.delete(u._id).success(function(){
-			$scope.users.splice(index_in_scope, 1);
-		});
+		var confirm = window.confirm("Voulez-vous vraiment supprimer cet utilisateur ?");
+		if (confirm == true) {
+			auth.delete(u._id).success(function(){
+				$scope.users.splice(index_in_scope, 1);
+			});
+		}
 	};
 }]);
