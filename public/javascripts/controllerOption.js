@@ -8,7 +8,7 @@ function($scope, $filter, auth, factOption) {
 
 	//ajouter une option à la liste d'options
 	$scope.addOption = function(id_option){
-		var trouve = $filter('getOptionsById')($scope.optionss, $scope.titre_option);
+		var trouve = $filter('getOptionsByTitle')($scope.optionss, $scope.titre_option);
 
 		if (trouve === null)
 		{
@@ -54,7 +54,7 @@ function($scope, $filter, auth, factOption) {
 	}
 }])
 
-.filter('getOptionsById', function() {
+.filter('getOptionsByTitle', function() {
   return function(input, titre) {
     var i=0, len=input.length;
     for (; i<len; i++) {

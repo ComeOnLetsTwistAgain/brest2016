@@ -109,31 +109,37 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 		if ($scope.libelle === '') {
 			return;
 		}
-		factAnimations.create({
-			
-			libelle : $scope.libelle,
-			description : $scope.description,
-			//nom_image : $scope.image.name,
-			place_dispo : $scope.place_max,
-			place_max  : $scope.place_max,
-			date : $scope.date,
-			heure_debut : $scope.heureDebut,
-			heure_fin : $scope.heureFin,
-			liste_options : tab
 
-		}).success(function(animation){
-			$scope.animations.push(animation);
-			//clear the values
-		$scope.libelle = '';
-		//$scope.place_debut = '';
-		$scope.place_max  = '';
-		$scope.date = '';
-		$scope.heureDebut = '';
-		$scope.heureFin = '';
-		$scope.description = '';
-		}).then(function(){
-			$state.go('home');
-		});
+		var trouve = $filter('getAnimationsByTitle')($scope.animations, $scope.libelle);
+
+		if (trouve === null)
+		{
+			factAnimations.create({
+			
+				libelle : $scope.libelle,
+				description : $scope.description,
+				//nom_image : $scope.image.name,
+				place_dispo : $scope.place_max,
+				place_max  : $scope.place_max,
+				date : $scope.date,
+				heure_debut : $scope.heureDebut,
+				heure_fin : $scope.heureFin,
+				liste_options : tab
+
+			});
+
+			// remet les champs à vides
+			$scope.libelle = '';
+			$scope.place_debut = '';
+			$scope.place_max  = '';
+			$scope.date = '';
+			$scope.heureDebut = '';
+			$scope.heureFin = '';
+			$scope.description = '';
+			$scope.error = '';
+		}else{
+			$scope.error = "Il existe déjà une animation avec ce titre";
+		}
 	};
 
 	//ajouter une réservation
@@ -212,6 +218,9 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 		//on met toute les option de option_in_animation dans un tableau
 		//qu'on passe après en paramêtre a liste_options
 		var tab = [];
+
+		$scope.success = '';
+		$scope.error = '';
 		angular.forEach($scope.option_in_animation, function(value){
 			tab.push(value.option);
 		});
@@ -220,34 +229,36 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 			return;
 		}
 		var animationToUpdate = $scope.animations[id_animation]; // recupère notre animation
+		var trouve = $filter('getAnimationsByTitle')($scope.animations, $scope.animation.libelle);
 
 		console.log("Animation a modifier "+ id_animation);
 		console.log("contenu de tab");
 		console.log(tab);
 		
 		animation = animationToUpdate; 
+		if (trouve === null)
+		{
+			factAnimations.update(id_animation, {
+				libelle : $scope.animation.libelle,
+				place_dispo : $scope.animation.place_dispo,
+				description : $scope.animation.description,
+				place_max  : $scope.animation.place_max,
+				date : $scope.animation.date,
+				heure_debut : $scope.animation.heure_debut,
+				heure_fin : $scope.animation.heure_fin,
+				liste_options : tab,
+			}).success(function(){
 
-		factAnimations.update(id_animation, {
-			libelle : $scope.animation.libelle,
-			place_dispo : $scope.animation.place_dispo,
-			description : $scope.animation.description,
-			place_max  : $scope.animation.place_max,
-			date : $scope.animation.date,
-			heure_debut : $scope.animation.heure_debut,
-			heure_fin : $scope.animation.heure_fin,
-			liste_options : tab,
-		}).success(function(){
+				$scope.success = "OK";
+				//réactualisation du tableau comprenant nos animations
+				//pas la meilleure methode, il faudrait trouver mieux
+				$scope.animations = factAnimations.animations;
 
-		$scope.success = "OK";
-		//réactualisation du tableau comprenant nos animations
-		//pas la meilleure methode, il faudrait trouver mieux
-		$scope.animations = factAnimations.animations;
 
-		/*angular.forEach($scope.checkboxes, function (item) {
-            console.log(item);
-        });*/
-
-		});
+			});
+		}else{
+			$scope.error = "Il existe déjà une animation avec ce titre";
+		}
 	};
 
 
@@ -264,6 +275,18 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
     return null;
   }
 })
+
+.filter('getAnimationsByTitle', function() {
+  return function(input, libelle) {
+    var i=0, len=input.length;
+    for (; i<len; i++) {
+      if (input[i].libelle === libelle) {
+        return input[i];
+      }
+    }
+    return null;
+  }
+});
 
 
 
