@@ -2,7 +2,15 @@ angular.module('brest.factAuth', [])
 
 .factory('auth', ['$http', '$rootScope','$location', '$window',
 function($http, $rootScope, $location, $window) {
-	var auth = {};
+	var auth = {
+		users : []
+	};
+
+	auth.getAllUsers = function(){
+		return $http.get('/users').success(function(data){
+			angular.copy(data, auth.users);
+		});
+	};
 
 	auth.saveToken = function(token) {
 		$window.localStorage['brest-token'] = token;
@@ -40,6 +48,10 @@ function($http, $rootScope, $location, $window) {
 
 			return payload.username;
 		}
+	};
+
+	auth.delete = function(id) {
+		return $http.delete('/user/' + id + '/remove');
 	};
 
 	auth.getCurrentPath = function(){

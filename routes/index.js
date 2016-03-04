@@ -133,6 +133,34 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
 // #######################################################
 
 /*
+*   USERS
+*/
+
+router.get('/users', function(req, res, next) {
+  User.find(function(err, users){
+    if(err) {return next(err);}
+    res.json(users);
+  })
+});
+
+router.delete('/user/:id/remove', function(req, res, next){
+  User.findById(req.params.id, function(err, user){
+    if(err) { return next(err);}
+    if(!user) { console.log('lalalala');}
+
+    user.remove(function(err){
+      if(err){return next(err);}
+      return res.send(204);
+    })
+  })
+});
+
+
+// #######################################################
+
+// #######################################################
+
+/*
 *   REGISTER
 */
 
