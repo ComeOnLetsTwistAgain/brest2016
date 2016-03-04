@@ -23,8 +23,6 @@ mongoose.connect(db_url, function(err,db){
 });
 
 // import des models
-require('./models/Posts');
-require('./models/Comments');
 require('./models/Options');
 require('./models/Animations');
 require('./models/Billets');
