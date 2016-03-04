@@ -255,6 +255,10 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 		});
 	};
 
+	$scope.timeChanged= function(){
+		console.log("time changed");
+	};
+
 
 }])
 
