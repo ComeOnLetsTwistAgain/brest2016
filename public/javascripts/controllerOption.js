@@ -33,9 +33,12 @@ function($scope, $filter, auth, factOption) {
 		console.log("deleting : " + index_in_scope);
 		if (option._id === ''){return;}
 
-		factOption.delete(option._id).success(function(){
-			$scope.optionss.splice(index_in_scope, 1);
-		});
+		var confirm = window.confirm("Voulez-vous vraiment supprimer cette option ?");
+		if (confirm == true) {
+			factOption.delete(option._id).success(function(){
+				$scope.optionss.splice(index_in_scope, 1);
+			});
+		}
 	};
 
 	//modifier une option
