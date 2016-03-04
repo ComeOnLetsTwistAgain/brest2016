@@ -16,10 +16,14 @@
 	<form ng-submit="addOption()" style="margin-top:30px;">
 
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Titre" ng-model="titre_option">
+			<input type="text" class="form-control" placeholder="Titre" ng-model="titre_option" ng-required="true">
 			<input type="text" class="form-control" placeholder="Description" ng-model="description_option">
 		</div>
-
+		{{optionss}}
 		<button type="submit" class="btn btn-primary">Ajouter</button>
+		<div ng-show="error" class="alert alert-danger">
+	  		<strong>ERREUR</strong> - {{error}}
+		</div>
+
 	</form>
 </div>
