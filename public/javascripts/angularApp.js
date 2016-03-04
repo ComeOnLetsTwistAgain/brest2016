@@ -99,6 +99,18 @@ function($stateProvider, $urlRouterProvider) {
 		}
 	})
 
+	.state('utilisateurs', {
+		url: '/utilisateurs',
+		templateUrl: '/utilisateurs.html',
+		controller: 'controllerAuth',
+		resolve : {
+			users : ['$stateParams', 'auth', 
+			function($stateParams, auth){
+				return auth.getAllUsers();
+			}]
+		}
+	})
+
 
 	.state('login', {
 		url : '/login',
@@ -154,6 +166,7 @@ function($stateProvider, $urlRouterProvider) {
 			if(
 			   toState.name === 'addAnimation' ||
 			   toState.name === 'addOption' ||
+			   toState.name === 'utilisateurs' ||
 			   toState.name === 'editAnimation'
 			  )
 			{

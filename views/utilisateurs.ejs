@@ -1,0 +1,13 @@
+<div class="page-header">
+    <h1>BREST 2016</h1>
+  </div>
+
+
+
+  <h2>Liste des utilisateurs</h2>
+
+  <div class="row row_reservation" ng-repeat="u in users">
+    <div class="col-md-4">Utilisateur : {{u.username}}</div>
+    <div class="col-md-4"><button class="btn btn-danger" ng-disabled="currentUsername == u.username" ng-click="deleteUser($index)">Supprimer</button></div>
+
+</div>

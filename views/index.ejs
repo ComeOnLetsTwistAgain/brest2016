@@ -42,6 +42,7 @@
 
       <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
       <li ng-show="isAdmin()"><a href="/#/addOption">Ajouter une option</a></li>
+      <li ng-show="isAdmin()"><a href="/#/utilisateurs">Utilisateurs</a></li>
 
       <li ng-show="isLoggedIn()"><a href="/#/mes_reservations">Mes reservations</a></li>
       <li ng-show="isLoggedIn()"><a class="nav_username">{{ currentUser() }}</a></li>
@@ -76,6 +77,10 @@
 
   <script type="text/ng-template" id="/editAnimation.html">
     <% include editAnimation %>
+  </script>
+
+  <script type="text/ng-template" id="/utilisateurs.html">
+    <% include utilisateurs %>
   </script>
 
   <script type="text/ng-template" id="/admin.html">

@@ -8,18 +8,31 @@
   	<form ng-submit="updateAnimation(animation._id)" style="margin-top:30px;">
 
     	<div class="form-group">
-          <input type="text" class="form-control" placeholder="Libelle" ng-model="animation.libelle" ng-required="true"></input>
+          <div class="col-md-2"><label for="libelle">Libelle</label></div>
+          <div class="col-md-10"><input type="text" class="form-control" placeholder="Libelle" ng-model="animation.libelle" ng-required="true"></input>
+          </div>
 
-      		<textarea placeholder="Description" class="form-control" ng-model="animation.description"></textarea>
+          <div class="col-md-2"><label for="description">Description</label></div>
+      		<div class="col-md-10"><textarea placeholder="Description" class="form-control" ng-model="animation.description"></textarea></div>
 
           <!-- Image de présentation : 
           <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile"> -->
           
+          <div class="col-md-2"><label for="date">Date</label></div>
+          <div class="col-md-10"><input id="date" type="date" class="form-control" placeholder="Date de l'animation" ng-model="animation.date"></input></div>
 
-      		<input type="number" class="form-control" placeholder="Nombre de place max" ng-model="animation.place_max"></input>
-          <input type="number" class="form-control" placeholder="Nombre de place dispo" ng-model="animation.place_dispo" min="0" max="{{animation.place_max}}"></input>
-      		<input type="text" class="form-control" placeholder="Heure de début" ng-model="animation.heure_debut"></input>
-      		<input type="text" class="form-control" placeholder="Heure de fin" ng-model="animation.heure_fin"></input>
+          <div class="col-md-2"><label for="place_max">Places max</label></div>
+      		<div class="col-md-10"><input type="number" class="form-control" placeholder="Nombre de place max" ng-model="animation.place_max"></input></div>
+
+          <div class="col-md-2"><label for="place_max">Places dispo</label></div>
+          <div class="col-md-10"><input type="number" class="form-control" placeholder="Nombre de place dispo" ng-model="animation.place_dispo" min="0" max="{{animation.place_max}}"></input></div>
+
+          <div class="col-md-2"><label for="heure_debut">Début</label></div>
+      		<div class="col-md-10"><input type="text" class="form-control" placeholder="Heure de début" ng-model="animation.heure_debut"></input></div>
+
+          <div class="col-md-2"><label for="heure_fin">Fin</label></div>
+      		<div class="col-md-10"><input type="text" class="form-control" placeholder="Heure de fin" ng-model="animation.heure_fin"></input></div>
+
     	</div>
 
       <h3>Modification des options choisies</h3>
