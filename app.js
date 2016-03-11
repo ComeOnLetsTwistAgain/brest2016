@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer({dest: 'img/'});
 
 var app = express();
 
@@ -56,11 +58,6 @@ app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 
-/* gestion du dossier d'upload d'images */
-app.use(bodyParser({
-        uploadDir: '/public/img',
-        keepExtensions: true
-    }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
