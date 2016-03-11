@@ -44,7 +44,6 @@ router.post('/img_anim', function(req, res){
   upload_img_anim(req, res, function(err){
     if(err) {console.log('erreur lors de l upload')}
 
-      req.file.filename = "newname";
     console.log(req.file.filename);
     res.end("File is uploaded");
   })
