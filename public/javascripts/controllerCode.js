@@ -1,21 +1,14 @@
 angular.module('brest.controllerCode', [])
 
-.controller('controllerCode', ['$scope', '$rootScope', '$filter', '$state', '$location', 'auth', 
-function($scope, $rootScope, $filter, $state, $location, auth, code) {
+.controller('controllerCode', ['$scope', '$rootScope', '$filter', '$state', '$location', 'auth', 'factCode',
+function($scope, $rootScope, $filter, $state, $location, auth, factCode) {
 
 	$scope.currentPath = $location.path();
 	$scope.formData = {};
 
+	//on récupère tous les options présentes en base
+	$scope.codes = factCode.codes;
 	
-	$scope.codes = [
-
-		'12345',
-		'ABCDE',
-		'67890',
-		'FGHIJ'
-
-	];
-
 
 	$scope.checkCode = function(){
 		if ($scope.theCode =''){
