@@ -1,6 +1,5 @@
 var app = angular.module('brest', ['ui.router', 
-	'brest.factAnimations', 'brest.factAuth', 'brest.factOption', 'brest.factReservations', 'brest.controllerReservation', 
-
+	'brest.factAnimations', 'brest.factAuth', 'brest.factOption', 'brest.factReservations', 'brest.factCode', 'brest.controllerReservation', 
 	'brest.controllerNav', 'brest.controllerCode', 'brest.controllerAnimation', 'brest.controllerOption', 'brest.controllerAuth']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -30,6 +29,19 @@ function($stateProvider, $urlRouterProvider) {
 		url: '/code',
 		templateUrl: '/code.html',
 		controller: 'controllerCode'
+	})
+
+	.state('addCodeBillet', {
+		url : '/addCodeBillet',
+		templateUrl : '/addCodeBillet.html',
+		controller : 'controllerCode',
+		resolve: {
+			billets : ['$stateParams', 'factCode',
+			function($stateParams, factCode){
+				return factCode.getAll();
+			}]
+		}
+		
 	})
 
 	.state('addAnimation', {

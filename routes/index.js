@@ -298,8 +298,7 @@ router.delete('/reservations/:id/remove', auth, function(req, res, next){
 
 // parametre option
 router.param('option', function(req, res, next, id) {
-  // var query = Reservation.findById(id);
-  var query = option_model.findById(id); // TODO: coloration en bleu de option normale ?? 
+  var query = option_model.findById(id);  
 
   query.exec(function (err, option){
     if (err) { return next(err); }
@@ -312,7 +311,7 @@ router.param('option', function(req, res, next, id) {
 
 // route pour l'ensemble des options
 router.get('/options', function(req, res, next) {
-  option_model.find(function(err, options){ // TODO: coloration en bleu de option normale ?? 
+  option_model.find(function(err, options){ 
     if(err){ 
       return next(err);
     }
@@ -332,7 +331,7 @@ router.get('/options/:id', function(req, res, next) {
 
 // route pour la création des options
 router.post('/options', auth, function(req, res, next) {
-  var option = new option_model(req.body); // TODO: coloration en bleu de option normale ??
+  var option = new option_model(req.body); 
 
   option.save(function(err, option){
     if(err){ return next(err); }
@@ -351,6 +350,70 @@ router.delete('/options/:id/remove', function(req, res, next) {
     });
   });
 });
+
+
+// #######################################################
+
+/* 
+* BILLET
+*/
+
+// parametre billet
+router.param('billet', function(req, res, next, id) {
+  var query = Billet.findById(id);  
+
+  query.exec(function (err, billet){
+    if (err) { return next(err); }
+    if (!billet) { return next(new Error("can't find billet")); }
+
+    req.billet = billet;
+    return next();
+  });
+});
+
+// route pour l'ensemble des billets
+router.get('/billets', function(req, res, next) {
+  Billet.find(function(err, billets){ 
+    if(err){ 
+      return next(err);
+    }
+
+    res.json(billets);
+  });
+});
+
+router.get('/billets/:id', function(req, res, next) {
+  Billet.findById(req.params.id, function(err, billet) {
+    if(err) { return next(err);}
+    if(!billet) { return res.send(404);}
+   
+    return res.json(billet);
+  });
+});
+
+// route pour la création des billets
+router.post('/billets', auth, function(req, res, next) {
+//router.post('/billets', function(req, res, next) {  // pour insérer en base des données sans Auth
+  var billet = new Billet(req.body); 
+
+  billet.save(function(err, billet){
+    if(err){ return next(err); }
+
+    res.json(billet);
+  });
+}); 
+
+router.delete('/billets/:id/remove', function(req, res, next) {
+  Billet.findById(req.params.id, function(err, billet) {
+    if(err) { return next(err);}
+    if(!billet) { return res.send(404);}
+    billet.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
+  });
+});
+
 
 
 // ligne a conserver à la fin pour l'export des routes définies
