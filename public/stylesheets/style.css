@@ -68,10 +68,7 @@ input, textarea{
     margin-top: 15px;
 }
 .img_animation{
-    background-image: url(../img/img_animation.jpg);
-    height: 200px;
-    background-repeat: no-repeat;
-    background-size: cover;
+    width: 100%;
 }
 
 .row_reservation{

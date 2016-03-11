@@ -5,7 +5,8 @@
 
   	<h2>Ajouter une animation </h2>
 
-  	<form ng-submit="addAnimation()" style="margin-top:30px;">
+  	<form ng-submit="addAnimation()" style="margin-top:30px;" enctype="multipart/form-data" method="post" action="/img_anim">
+
 
     	<div class="form-group">
 
@@ -17,7 +18,9 @@
       		<div class="col-md-10"><textarea id="description" placeholder="Description" class="form-control" ng-model="description"></textarea></div>
 
          
-          <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" ng-model="image" file-model = "myFile">
+          <input type="file" name="image" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile">
+
+          {{image.name}}
 
           
           <div class="col-md-2"><label for="place_max">Places max</label></div>
@@ -32,7 +35,7 @@
       		<div class="col-md-10"><input id="heure_debut" type="time" datetime="hh:mm" class="form-control" placeholder="Heure de début" ng-model="heureDebut"></input></div>
 
           <div class="col-md-2"><label for="heure_fin">Fin</label></div>
-      		<div class="col-md-10"><input id="heure_fin" type="time" datetime="hh:mm" class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input></div>
+      		<div class="col-md-10"><input id="heure_fin" type="time" datetime="hh:mm"class="form-control" placeholder="Heure de fin" ng-model="heureFin"></input></div>
 
     	</div>
 
