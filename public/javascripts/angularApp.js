@@ -28,7 +28,13 @@ function($stateProvider, $urlRouterProvider) {
 	.state('code', {
 		url: '/code',
 		templateUrl: '/code.html',
-		controller: 'controllerCode'
+		controller: 'controllerCode',
+		resolve: {
+			billets : ['$stateParams', 'factCode',
+			function($stateParams, factCode){
+				return factCode.getAll();
+			}]
+		}
 	})
 
 	.state('addCodeBillet', {
