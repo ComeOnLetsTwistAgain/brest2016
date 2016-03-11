@@ -36,6 +36,10 @@ angular.module('brest.factAnimations', [])
 		});
 	};
 
+	o.upload = function(image){
+		return $http.post('/img_anim');
+	};
+
 	o.getReservationPage= function(id_animation){
 		return $http.get('/animations/'+ id_animation ).then(function(res)
 		{

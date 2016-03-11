@@ -123,7 +123,7 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 			
 				libelle : $scope.libelle,
 				description : $scope.description,
-				//nom_image : $scope.image.name,
+				nom_image : $scope.image.name,
 				place_dispo : $scope.place_max,
 				place_max  : $scope.place_max,
 				date : $scope.date,
@@ -131,6 +131,10 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 				heure_fin : $scope.heureFin,
 				liste_options : tab
 
+			}).success(function(){
+				//si l'animation est enregistré en base, on upload l'image
+				console.log($scope.image);
+				factAnimations.upload($scope.image);
 			});
 
 			// remet les champs à vides

@@ -3,6 +3,18 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var jwt = require('express-jwt');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/img/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
+
+var upload_img_anim = multer({storage : storage}).single('image');
 
 var option_model = mongoose.model('Option'); 
 var Animation = mongoose.model('Animation');
@@ -21,6 +33,23 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 router.get('/', function(req, res) {
   res.render('index');
 });
+
+// #######################################################
+
+/*
+*   UPLOADS
+*/
+
+router.post('/img_anim', function(req, res){
+  upload_img_anim(req, res, function(err){
+    if(err) {console.log('erreur lors de l upload')}
+
+      req.file.filename = "newname";
+    console.log(req.file.filename);
+    res.end("File is uploaded");
+  })
+});
+
 
 // #######################################################
 
