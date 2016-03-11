@@ -5,7 +5,13 @@ angular.module('brest.factCode', [])
 		code : []
 	};
 
+	/*Methodes*/
 
+	o.getAll = function(){
+		return $http.get('/billets').success(function(data) {
+			angular.copy(data, o.code);
+		});
+	};
 
 	return o;
 }]);

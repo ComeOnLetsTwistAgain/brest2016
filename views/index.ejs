@@ -24,6 +24,7 @@
   <script src="javascripts/factAnimations.js"></script>
   <script src="javascripts/factOption.js"></script>
   <script src="javascripts/factReservations.js"></script>
+  <script src="javascripts/factCode.js"></script>
 
 
 
@@ -42,6 +43,7 @@
 
       <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
       <li ng-show="isAdmin()"><a href="/#/addOption">Ajouter une option</a></li>
+      <li ng-show="isAdmin()"><a href="/#/addCodeBillet">Ajouter un code billet</a></li>
       <li ng-show="isAdmin()"><a href="/#/utilisateurs">Utilisateurs</a></li>
 
       <li ng-show="isLoggedIn()"><a href="/#/mes_reservations">Mes reservations</a></li>
@@ -93,7 +95,9 @@
     <% include code %>
   </script>
 
-
+  <script type="text/ng-template" id="/addCodeBillet.html">
+    <% include addCodeBillet %>
+  </script>
 
 
 
