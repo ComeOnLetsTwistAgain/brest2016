@@ -16,8 +16,9 @@
           <div class="col-md-2"><label for="description">Description</label></div>
       		<div class="col-md-10"><textarea id="description" placeholder="Description" class="form-control" ng-model="description"></textarea></div>
 
-          <!-- Image de présentation : 
-          <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" file-model = "myFile"> -->
+         
+          <input type="file" class="form-control" onchange="angular.element(this).scope().setImageFile(this)" ng-model="image" file-model = "myFile">
+
           
           <div class="col-md-2"><label for="place_max">Places max</label></div>
       		<div class="col-md-10"><input id="place_max" type="number" class="form-control" placeholder="Nombre de place max" ng-model="place_max" value="0" min="0" max="10"></input></div>

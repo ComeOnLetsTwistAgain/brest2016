@@ -21,6 +21,20 @@ h2{
     color: white !important;
 }
 
+.navbar-default{
+        background-color: rgba(248, 248, 248, 0.9);
+}
+
+.banner{
+    padding: 0;
+    background: black;
+    height: 250px;
+    background-image: url(../img/banner-hermione.jpg);
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 input, textarea{
 	margin-bottom: 15px;
 }
