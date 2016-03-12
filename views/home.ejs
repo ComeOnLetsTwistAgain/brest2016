@@ -25,10 +25,10 @@
           <br/><br/>
           <div class="col-md-12 ajout-options">
             <h4>Options disponibles</h4>
-            {{a.optionss}}
-            <!-- <div ng-repeat="o in a.liste_options">
-              {{o.titre}}
-            </div> -->
+           
+            <div ng-repeat="o in a.optionss">
+              <p>{{o.titre}} - <span>{{o.description}}</span></p>
+            </div>
           </div>
           <br/><br/>
           <!-- ADMIN PART -->

@@ -39,9 +39,17 @@
       <h3>Modification des options choisies</h3>
       <div class="col-md-12 ajout-options">
         <div ng-repeat="o in optionss">
-          <input type="checkbox" ng-model="checkboxes" ng-change="addCheckOption(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}</label>
+          <input 
+          type="checkbox" 
+          id="{{o._id}}" 
+          checklist-model="option_in_animation"
+          checklist-value="o._id"
+          ng-change="addCheckOption(o._id, checked)" 
+          > 
+          <label for="{{o._id}}">{{o.titre}}</label>
         </div>
       </div>
+
 
     	<button type="submit" class="btn btn-primary">Modifier</button>
 

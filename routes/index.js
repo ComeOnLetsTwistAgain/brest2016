@@ -47,7 +47,7 @@ router.post('/img_anim', function(req, res){
     if(err) {console.log('erreur lors de l upload')}
 
     console.log(req.file.filename);
-    res.end("File is uploaded");
+    res.redirect('/#/home');
   })
 });
 
@@ -208,7 +208,7 @@ router.get('/animations/:id', function(req, res, next) {
       return res.send(404);
     }
     return res.json(animation);
-  });
+  }).populate('optionss');
 });
 
 router.put('/animations/:id/decrPlaceDispo',  function(req, res, next) {
@@ -252,7 +252,7 @@ router.put('/animations/:id', function(req, res, next) {
     animation.date = req.body.animation.date;
     animation.heure_debut = req.body.animation.heure_debut;
     animation.heure_fin = req.body.animation.heure_fin;
-    animation.liste_options = req.body.animation.liste_options;
+    animation.optionss = req.body.animation.optionss;
 
     animation.save(function (err) {
       if (err) return handleError(err);
@@ -288,14 +288,14 @@ router.get('/reservations', function(req, res, next) {
     }
 
     res.json(reservations);
-  });
+  }).populate('optionss');
 });
 
 router.get('/mes_reservations/:user', auth, function(req, res, next){
   Reservation.find({'user': req.params.user}, function(err, reservations){
     if(err){ return next(err); } 
     res.json(reservations);
-  })
+  }).populate('optionss');
 });
 
 

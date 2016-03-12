@@ -7,14 +7,7 @@ var ReservationsSchema = new mongoose.Schema({
 	user:String,
 	nom_image : String,
 	nbPlaceReserve : Number,
-	listeOptions: [
-		{
-			_id : String,
-			titre : String,
-			description : String,
-			__v : Number
-		}
-	]
+	optionss: [{type: mongoose.Schema.Types.ObjectId, ref: 'Option'}]
 });
 
 mongoose.model('Reservation', ReservationsSchema);
