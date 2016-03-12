@@ -15,9 +15,7 @@ var storage = multer.diskStorage({
 })
 
 var upload_img_anim = multer({
-  dest: 'public/img/uploads/',
-  storage : storage,
-
+  storage : storage
 }).single('image');
 
 var option_model = mongoose.model('Option'); 

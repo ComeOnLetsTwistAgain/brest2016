@@ -9,10 +9,7 @@ function($scope, $rootScope, $filter, $state, $location, auth, factCode) {
 	//on récupère tous les options présentes en base
 	// $scope.codes = factCode.codes;
 
-	$scope.codes = [
-		'12345',
-		'AZERT'
-	];
+	$scope.codes = factCode.codes;
 
 	$scope.error = "";
 	
@@ -20,6 +17,8 @@ function($scope, $rootScope, $filter, $state, $location, auth, factCode) {
 		if ($scope.theCode =''){
 			return;
 		}
+
+		console.log("checking code");
 
 		/*var trouve = $filter('getCodeByNumero')($scope.codes, $scope.code_billet);
 		console.log(trouve);
@@ -31,10 +30,9 @@ function($scope, $rootScope, $filter, $state, $location, auth, factCode) {
 			$scope.error = "code trouvé";
 		}	*/
 
-		var notfound = false;
 		for (var i = 0; i <= $scope.codes.length; i++) {
-			
-			if($scope.formData.code === $scope.codes[i]){
+
+			if($scope.formData.code == $scope.codes[i].code_billet){
 				$rootScope.$broadcast('code:correct');
 			} else {
 				$scope.error = 'Le code rentré n\'est pas correct';

@@ -17,7 +17,8 @@ var AnimationsSchema = new mongoose.Schema({
 			description : String,
 			__v : Number
 		}
-	]
+	],
+	//optionss: [{type: mongoose.Schema.Types.ObjectId, ref: 'Option'}]
 });
 
 AnimationsSchema.methods.decrPlaceDispo = function(a, nbPlaces){

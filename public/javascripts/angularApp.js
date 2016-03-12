@@ -156,7 +156,7 @@ function($stateProvider, $urlRouterProvider) {
 
 	});
 
-	$urlRouterProvider.otherwise('code');
+	$urlRouterProvider.otherwise('home');
 }])
 .run(function($rootScope, $state, auth){
 	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
