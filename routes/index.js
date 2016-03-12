@@ -157,12 +157,14 @@ router.get('/animations', function(req, res, next) {
       return next(err);
     }
     res.json(animations);
-  });
+  }).populate('optionss');
 });
 
 // route pour la création d'une animation
 router.post('/animations', auth, function(req, res, next) {
   var animation = new Animation(req.body);
+
+
 
   animation.save(function(err, animation){
     if(err){ return next(err); }

@@ -10,15 +10,7 @@ var AnimationsSchema = new mongoose.Schema({
 	date : Date,
 	heure_debut : String,
 	heure_fin : String, 
-	liste_options: [
-		{
-			_id : String,
-			titre : String,
-			description : String,
-			__v : Number
-		}
-	],
-	//optionss: [{type: mongoose.Schema.Types.ObjectId, ref: 'Option'}]
+	optionss: [{type: mongoose.Schema.Types.ObjectId, ref: 'Option'}]
 });
 
 AnimationsSchema.methods.decrPlaceDispo = function(a, nbPlaces){
