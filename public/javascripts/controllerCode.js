@@ -30,7 +30,7 @@ function($scope, $rootScope, $filter, $state, $location, auth, factCode) {
 			$scope.error = "code trouvé";
 		}	*/
 
-		for (var i = 0; i <= $scope.codes.length; i++) {
+		for (var i = 0; i < $scope.codes.length; i++) {
 
 			if($scope.formData.code == $scope.codes[i].code_billet){
 				$rootScope.$broadcast('code:correct');
