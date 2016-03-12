@@ -58,12 +58,7 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 			var option = factOption.getOne(id_option);
 			option.then(function(result){
 				
-				$scope.option_in_animation.push(
-					{
-						'idoption' : id_option,
-						'option' : result.data
-					}
-				);
+				$scope.option_in_animation.push(id_option);
 			});
 		}
 	}
@@ -129,7 +124,7 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 				date : $scope.date,
 				heure_debut : $scope.heureDebut,
 				heure_fin : $scope.heureFin,
-				liste_options : tab
+				optionss : $scope.option_in_animation
 
 			}).success(function(){
 				//si l'animation est enregistré en base, on upload l'image
@@ -281,7 +276,7 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
   return function(input, id) {
     var i=0, len=input.length;
     for (; i<len; i++) {
-      if (input[i].idoption == id) {
+      if (input[i] == id) {
         return input[i];
       }
     }
