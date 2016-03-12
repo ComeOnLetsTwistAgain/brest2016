@@ -40,6 +40,8 @@
     	</div>
 
       <h3>Ajout d'options</h3>
+
+      {{option_in_animation}}
       <div class="col-md-12 ajout-options">
         <div ng-repeat="o in optionss">
           <input type="checkbox" ng-model="checkboxes" ng-change="addCheckOption(o._id)" id="{{o._id}}" > <label for="{{o._id}}">{{o.titre}}</label>
