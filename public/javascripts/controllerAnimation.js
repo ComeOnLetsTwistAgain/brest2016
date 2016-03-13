@@ -34,7 +34,12 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-	var socket = io.connect('http://localhost:8080');
+	var socketlocalhost = io.connect('http://localhost:8080');
+	var socket = io.connect('http://89.3.149.179:8080');
+	socketlocalhost.on('client_call_animations', function(){
+		factAnimations.getAll();
+	});
+
 	socket.on('client_call_animations', function(){
 		factAnimations.getAll();
 	});
