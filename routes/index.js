@@ -166,6 +166,7 @@ var returnRouter = function(io) {
       if(err){ 
         return next(err);
       }
+
       res.json(animations);
     }).populate('optionss');
   });
@@ -173,11 +174,10 @@ var returnRouter = function(io) {
   // route pour la création d'une animation
   router.post('/animations', auth, function(req, res, next) {
     var animation = new Animation(req.body);
-
-
-
     animation.save(function(err, animation){
       if(err){ return next(err); }
+
+      io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
 
       res.json(animation);
     });
@@ -189,6 +189,7 @@ var returnRouter = function(io) {
       if(!animation) { return res.send(404);}
       animation.remove(function(err) {
         if(err) { return handleError(res, err); }
+        io.sockets.emit('client_call_animations', 'animation supprimée');
         return res.send(204);
       });
     });
@@ -332,6 +333,7 @@ var returnRouter = function(io) {
 
       reservation.remove(function(err) {
         if(err) { return handleError(res, err); }
+        io.sockets.emit('client_call_mes_reservations', 'reservations supprimée');
         return res.send(204);
       });
     });

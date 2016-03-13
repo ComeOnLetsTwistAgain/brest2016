@@ -14,8 +14,8 @@ function($scope, auth, factReservations) {
 
 
 	var socket = io.connect('http://localhost:8080');
-	socket.on('connect', function(msg){
-		console.log(msg);
+	socket.on('connect', function(connect){
+		console.log(connect);
 	});
 	socket.on('client_call_mes_reservations', function(message) {
         factReservations.getMyReservations(auth.currentUser());
@@ -26,7 +26,6 @@ function($scope, auth, factReservations) {
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(index_in_scope){
 		var reservation = $scope.reservations[index_in_scope];
-		console.log('deleting - index : ' + index_in_scope + ' id : ' + reservation._id);
 		if (reservation._id === ''){return;}
 
 		var confirm = window.confirm("Voulez-vous vraiment annuler cette reservation ?");

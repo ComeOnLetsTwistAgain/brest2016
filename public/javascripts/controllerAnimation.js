@@ -34,11 +34,10 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-
-
-    $scope.sendtoserver = function(){
-    	socket.emit('message_from_client', $scope.test);
-    };
+	var socket = io.connect('http://localhost:8080');
+	socket.on('client_call_animations', function(){
+		factAnimations.getAll();
+	});
 
 	
 	$scope.refreshAnimations = function(){
