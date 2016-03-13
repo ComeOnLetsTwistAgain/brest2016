@@ -13,6 +13,12 @@ function($scope, auth, factReservations) {
 	$scope.user = auth.currentUser();
 
 
+	var socket = io.connect('http://localhost:8080');
+	socket.on('client_call_mes_reservations', function(message) {
+        factReservations.getMyReservations();
+    });
+
+
 
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(index_in_scope){

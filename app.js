@@ -33,12 +33,28 @@ require('./models/Reservations');
 
 require('./config/passport');
 
-var routes = require('./routes/index');
+
+
+
+//SOCKETS
+var server = require('http').createServer(app); 
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket){
+    console.log('client connected');
+    socket.emit('message', 'Connected to socket');
+
+    
+});
+
+server.listen(8080);
+
+var routes = require('./routes/index')(io);
 var users = require('./routes/users');
 
 
 /*########################################*/
-/* Tucs incompréhensibles de node         */
+/* CONFIG NODE                            */
 /*########################################*/
 
 // view engine setup

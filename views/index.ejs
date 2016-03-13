@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>BREST 2016</title>
+  
   <!-- BOOTSTRAP -->
   <link href="stylesheets/bootstrap.css" rel="stylesheet"> 
   <link href="stylesheets/style.css" rel="stylesheet"> 
@@ -11,6 +12,7 @@
 
   <!-- libs -->
   <script src='lib/checklist-model/checklist-model.js'></script>
+  <script src="lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 
 
   <!-- Angular app / controllers / routes / factories-->
@@ -38,6 +40,8 @@
 
 
 <body ng-app="brest">
+
+  
 
   <nav class="navbar navbar-default pull-right" ng-controller="controllerNav" ng-hide="currentPath() === '/code'">
     

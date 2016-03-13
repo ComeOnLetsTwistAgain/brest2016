@@ -34,7 +34,11 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-	
+
+
+    $scope.sendtoserver = function(){
+    	socket.emit('message_from_client', $scope.test);
+    };
 
 	
 	$scope.refreshAnimations = function(){
