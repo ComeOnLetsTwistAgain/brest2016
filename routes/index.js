@@ -1,9 +1,13 @@
+
 var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var jwt = require('express-jwt');
 var multer = require('multer');
+
+
+var app = require('../app');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -20,6 +24,10 @@ var upload_img_anim = multer({
 
 }).single('image');
 
+/*SOCKETS*/
+
+
+
 var option_model = mongoose.model('Option'); 
 var Animation = mongoose.model('Animation');
 
@@ -33,6 +41,8 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 /*
 *   HOME
 */
+
+var returnRouter = function(io) {
 
 router.get('/', function(req, res) {
   res.render('index');
@@ -296,6 +306,10 @@ router.get('/reservations', function(req, res, next) {
 router.get('/mes_reservations/:user', auth, function(req, res, next){
   Reservation.find({'user': req.params.user}, function(err, reservations){
     if(err){ return next(err); } 
+
+    //call socket
+    
+
     res.json(reservations);
   })
 });
@@ -308,6 +322,7 @@ router.post('/reservations', auth, function(req, res, next) {
   reservation.save(function(err, reservation){
     if(err){ return next(err); }
 
+    io.sockets.emit('client_call_mes_reservations', 'nouvelle reservation ajoutée');
     res.json(reservation);
   });
 });
@@ -448,7 +463,8 @@ router.delete('/billets/:id/remove', function(req, res, next) {
   });
 });
 
-
+return router;
+}
 
 // ligne a conserver à la fin pour l'export des routes définies
-module.exports = router;
+module.exports = returnRouter;
