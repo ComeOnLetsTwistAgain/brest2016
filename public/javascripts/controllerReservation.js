@@ -18,7 +18,7 @@ function($scope, auth, factReservations) {
 		console.log(msg);
 	});
 	socket.on('client_call_mes_reservations', function(message) {
-        factReservations.getMyReservations();
+        factReservations.getMyReservations(auth.currentUser());
     });
 
 
