@@ -34,9 +34,7 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-	if($scope.check){
-		console.log("dzedze");
-	}
+	
 
 	
 	$scope.refreshAnimations = function(){
