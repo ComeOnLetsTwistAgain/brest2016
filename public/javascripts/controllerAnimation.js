@@ -30,6 +30,14 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
+	var socket = io.connect('http://localhost:8080');
+	socket.on('message', function(message) {
+        console.info("socket : " + message);
+    });
+
+    $scope.sendtoserver = function(){
+    	socket.emit('message_from_client', $scope.test);
+    };
 
 	
 	$scope.refreshAnimations = function(){

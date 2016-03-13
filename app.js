@@ -37,6 +37,21 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 
+//SOCKETS
+var server = require('http').createServer(app); 
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket){
+    console.log('client connected');
+    socket.emit('message', 'Connected to scoket');
+
+    socket.on('message_from_client', function(msg){
+        console.log(msg);
+    })
+});
+server.listen(8080);
+
 /*########################################*/
 /* Tucs incompréhensibles de node         */
 /*########################################*/

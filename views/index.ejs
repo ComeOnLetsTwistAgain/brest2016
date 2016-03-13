@@ -1,6 +1,9 @@
 <html>
 <head>
   <title>BREST 2016</title>
+  <input type="text" ng-model="test" ng-change="">
+  <button ng-click="sendtoserver()">send</button>
+  {{test}}
   <!-- BOOTSTRAP -->
   <link href="stylesheets/bootstrap.css" rel="stylesheet"> 
   <link href="stylesheets/style.css" rel="stylesheet"> 
@@ -8,6 +11,8 @@
   <!-- Angular API -->
   <script src="lib/angular.js"></script>
   <script src="lib/angular-ui-router.js"></script>
+
+  <script src="lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 
 
   <!-- Angular app / controllers / routes / factories-->
