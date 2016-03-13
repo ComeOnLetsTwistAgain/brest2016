@@ -14,6 +14,9 @@ function($scope, auth, factReservations) {
 
 
 	var socket = io.connect('http://localhost:8080');
+	socket.on('connect', function(msg){
+		console.log(msg);
+	});
 	socket.on('client_call_mes_reservations', function(message) {
         factReservations.getMyReservations();
     });

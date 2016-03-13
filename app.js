@@ -42,7 +42,7 @@ var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket){
     console.log('client connected');
-    socket.emit('message', 'Connected to socket');
+    socket.emit('connect', 'Connected to socket');
 
     
 });
