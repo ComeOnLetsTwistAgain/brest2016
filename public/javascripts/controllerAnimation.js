@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', ["checklist-model"])
 
-.controller('controllerAnimation', ['$scope', '$filter', '$state', 'auth', 'factAnimations', 'factOption', 'factReservations',
-function($scope, $filter, $state, auth, factAnimations, factOption, factReservations) {
+.controller('controllerAnimation', ['$scope', '$location', '$filter', '$state', 'auth', 'factAnimations', 'factOption', 'factReservations',
+function($scope, $location, $filter, $state, auth, factAnimations, factOption, factReservations) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -34,11 +34,10 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-	var socketlocalhost = io.connect('http://localhost:8080');
-	var socket = io.connect('http://89.3.149.179:8080');
-	socketlocalhost.on('client_call_animations', function(){
-		factAnimations.getAll();
-	});
+
+	var where = $location.$$host;
+	var socket = io.connect('http://'+where+':3000');
+	
 
 	socket.on('client_call_animations', function(){
 		factAnimations.getAll();

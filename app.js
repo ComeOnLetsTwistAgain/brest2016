@@ -47,7 +47,7 @@ io.sockets.on('connection', function(socket){
     
 });
 
-server.listen(8080);
+server.listen(3000);
 
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');
