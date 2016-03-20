@@ -2,7 +2,7 @@ Projet JEE - BREST 2016
 =======================
 MEAN Stack :
 
-#MongoDB
+MongoDB
 Express
 Angular
 Node.js
