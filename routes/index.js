@@ -269,6 +269,7 @@ var returnRouter = function(io) {
 
       animation.save(function (err) {
         if (err) return handleError(err);
+        io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
         res.send(animation);
       });
     });

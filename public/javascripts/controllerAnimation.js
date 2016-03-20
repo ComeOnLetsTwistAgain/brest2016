@@ -43,6 +43,23 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 		factAnimations.getAll();
 	});
 
+
+	if(window.DeviceOrientationEvent){
+    	MobileReader.bindOrientation({
+
+	      	callback: function(orientation) {
+	        	$scope.$apply(function(){$scope.x = orientation.gamma;})
+	        	$scope.$apply(function(){$scope.y = orientation.beta;})
+	        	document.getElementsByClassName('.cube');
+	      	},
+	     	interval: 0
+	    });
+    }
+
+
+
+    
+
 	
 	$scope.refreshAnimations = function(){
 		factAnimations.getAll();
