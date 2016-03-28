@@ -101,6 +101,18 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 
 		if (trouve === null)
 		{
+
+			console.log("heure debut"+$scope.heureDebut);
+			console.log("heure fin "+$scopre.heureFin);
+
+			if ($scope.heureDebut < $scope.heureFin)
+			{
+				console.log("heureDebut < heureFin");
+			}else{
+				console.log("heureDebut > heureFin");
+			}
+
+
 			factAnimations.create({
 			
 				libelle : $scope.libelle,
