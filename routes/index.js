@@ -230,6 +230,7 @@ var returnRouter = function(io) {
       animation.decrPlaceDispo(function(err, animation){
         if(err){return next(err);}
         res.json(animation);
+        io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
       }, req.body.infos.nbPlaces);
       
     });
@@ -243,6 +244,7 @@ var returnRouter = function(io) {
       animation.incrPlaceDispo(function(err, animation){
         if(err){return next(err);}
         res.json(animation);
+        io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
       }, req.body.infos.nbPlaces);
       
     });
@@ -267,6 +269,7 @@ var returnRouter = function(io) {
 
       animation.save(function (err) {
         if (err) return handleError(err);
+        io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
         res.send(animation);
       });
     });

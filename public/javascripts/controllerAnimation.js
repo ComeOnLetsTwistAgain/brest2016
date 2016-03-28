@@ -1,7 +1,7 @@
 angular.module('brest.controllerAnimation', ["checklist-model"])
 
-.controller('controllerAnimation', ['$scope', '$filter', '$state', 'auth', 'factAnimations', 'factOption', 'factReservations',
-function($scope, $filter, $state, auth, factAnimations, factOption, factReservations) {
+.controller('controllerAnimation', ['$scope', '$location', '$filter', '$state', 'auth', 'factAnimations', 'factOption', 'factReservations',
+function($scope, $location, $filter, $state, auth, factAnimations, factOption, factReservations) {
 
 	//on récupère toutes les animations présentes en base
 	$scope.animations = factAnimations.animations;
@@ -34,10 +34,31 @@ function($scope, $filter, $state, auth, factAnimations, factOption, factReservat
 	//nb de reservations par défaut
 	$scope.nbPlaceReserve = 1;
 
-	var socket = io.connect('http://localhost:8080');
+
+	var where = $location.$$host;
+	var socket = io.connect('http://'+where+':3000');
+	
+
 	socket.on('client_call_animations', function(){
 		factAnimations.getAll();
 	});
+
+
+	if(window.DeviceOrientationEvent){
+    	MobileReader.bindOrientation({
+
+	      	callback: function(orientation) {
+	        	$scope.$apply(function(){$scope.x = orientation.gamma;})
+	        	$scope.$apply(function(){$scope.y = orientation.beta;})
+	        	document.getElementsByClassName('.cube');
+	      	},
+	     	interval: 0
+	    });
+    }
+
+
+
+    
 
 	
 	$scope.refreshAnimations = function(){

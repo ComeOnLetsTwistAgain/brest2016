@@ -41,13 +41,17 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket){
-    console.log('client connected');
+    console.log('[SOCKET] Client - ');
     socket.emit('connect', 'Connected to socket');
 
     
 });
 
-server.listen(8080);
+io.sockets.on('devOrient', function(msg){
+    console.log('yo');
+});
+
+server.listen(3000);
 
 var routes = require('./routes/index')(io);
 var users = require('./routes/users');

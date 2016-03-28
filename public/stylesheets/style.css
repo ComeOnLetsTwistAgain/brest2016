@@ -51,6 +51,19 @@ input, textarea{
     border-radius: 7px;
 }
 
+.pre-cube{
+
+}
+
+.cube{
+    height: 20px;
+    width: 20px;
+    background: red;
+        display: block;
+    margin: 0 auto;
+        position: relative;
+}
+
 
 .ajout-options{
  background-color: rgba(0, 188, 212, 0.2);

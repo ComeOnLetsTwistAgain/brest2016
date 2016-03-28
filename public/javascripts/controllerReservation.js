@@ -1,7 +1,7 @@
 angular.module('brest.controllerReservation', [])
 
-.controller('controllerReservation', ['$scope', 'auth', 'factReservations', 
-function($scope, auth, factReservations) {
+.controller('controllerReservation', ['$scope', '$location', 'auth', 'factReservations', 
+function($scope, $location, auth, factReservations) {
 
 	//on récupère toutes les réservations présentes en base
 	$scope.reservations = factReservations.reservations;
@@ -12,14 +12,14 @@ function($scope, auth, factReservations) {
 	//retourne l'user courant
 	$scope.user = auth.currentUser();
 
-
-	var socket = io.connect('http://localhost:8080');
-	socket.on('connect', function(connect){
-		console.log(connect);
-	});
+	var where = $location.$$host;
+	var socket = io.connect('http://'+where+':3000');
+	
 	socket.on('client_call_mes_reservations', function(message) {
         factReservations.getMyReservations(auth.currentUser());
     });
+
+
 
 
 
