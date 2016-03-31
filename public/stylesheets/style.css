@@ -92,3 +92,10 @@ input, textarea{
 .row_reservation .options{
     border: 1px solid grey;
 }
+
+/*taille 1*/
+@media (max-width: 768px){
+    .navbar{
+        position: relative;
+    }
+}

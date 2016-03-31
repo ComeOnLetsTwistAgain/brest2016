@@ -44,7 +44,7 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 	});
 
 
-	if(window.DeviceOrientationEvent){
+	/*if(window.DeviceOrientationEvent){
     	MobileReader.bindOrientation({
 
 	      	callback: function(orientation) {
@@ -54,7 +54,7 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 	      	},
 	     	interval: 0
 	    });
-    }
+    }*/
 
 
 
