@@ -1,10 +1,11 @@
 angular.module('brest.controllerReservation', [])
 
-.controller('controllerReservation', ['$scope', '$location', 'auth', 'factReservations', 
-function($scope, $location, auth, factReservations) {
+.controller('controllerReservation', ['$scope', '$location', 'auth', 'factReservations', 'factAnimations', 
+function($scope, $location, auth, factReservations, factAnimations) {
 
 	//on récupère toutes les réservations présentes en base
 	$scope.reservations = factReservations.reservations;
+
 
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
@@ -18,9 +19,6 @@ function($scope, $location, auth, factReservations) {
 	socket.on('client_call_mes_reservations', function(message) {
         factReservations.getMyReservations(auth.currentUser());
     });
-
-
-
 
 
 	//fonction de suppresion d'une réservation
