@@ -14,6 +14,8 @@
   <script src='lib/checklist-model/checklist-model.js'></script>
   <script src="lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
   <script src="lib/mobile-orientation.js"></script>
+  <script src="lib/jquery-1.12.2.min.js"></script>
+  <script src="lib/bootstrap.min.js"></script>
 
 
   <!-- Angular app / controllers / routes / factories-->
@@ -49,9 +51,18 @@
     <ul class="nav navbar-nav">
       <li ng-show="isLoggedIn()"><a href="/#/home">Accueil</a></li>
 
-      <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
-      <li ng-show="isAdmin()"><a href="/#/addOption">Ajouter une option</a></li>
-      <li ng-show="isAdmin()"><a href="/#/addCodeBillet">Ajouter un code billet</a></li>
+      
+      <li ng-show="isAdmin()">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <li ng-show="isAdmin()"><a href="/#/addAnimation">Ajouter une animation</a></li>
+            <li ng-show="isAdmin()"><a href="/#/addOption">Ajouter une option</a></li>
+            <li ng-show="isAdmin()"><a href="/#/addCodeBillet">Ajouter un code billet</a></li>
+          </ul>
+        </li>
+      </li>
       <li ng-show="isAdmin()"><a href="/#/utilisateurs">Utilisateurs</a></li>
 
       <li ng-show="isLoggedIn()"><a href="/#/mes_reservations">Mes reservations</a></li>
