@@ -17,7 +17,7 @@
 	<form ng-submit="addCodeBillet()" style="margin-top:30px;">
 
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Numero" ng-model="code_billet" ng-required="true">
+			<input type="number" class="form-control" placeholder="Numero uniquement" ng-model="code_billet" ng-required="true">
 		</div>
 		<button type="submit" class="btn btn-primary">Ajouter</button>
 		<div ng-show="error" class="alert alert-danger">
