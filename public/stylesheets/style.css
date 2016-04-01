@@ -55,6 +55,14 @@ input, textarea{
 
 }
 
+.panel-heading{
+    font-weight: bold;
+}
+
+.alert{
+    margin-top: 0 !important;
+}
+
 .cube{
     height: 20px;
     width: 20px;
@@ -91,4 +99,11 @@ input, textarea{
 
 .row_reservation .options{
     border: 1px solid grey;
+}
+
+/*taille 1*/
+@media (max-width: 768px){
+    .navbar{
+        position: relative;
+    }
 }

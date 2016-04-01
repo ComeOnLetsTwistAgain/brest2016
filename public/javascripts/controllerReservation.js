@@ -1,10 +1,14 @@
 angular.module('brest.controllerReservation', [])
 
-.controller('controllerReservation', ['$scope', '$location', 'auth', 'factReservations', 
-function($scope, $location, auth, factReservations) {
+.controller('controllerReservation', ['$scope', '$location', 'auth', 'factReservations', 'factAnimations', 
+function($scope, $location, auth, factReservations, factAnimations) {
 
 	//on récupère toutes les réservations présentes en base
 	$scope.reservations = factReservations.reservations;
+	factAnimations.getAll().success(function(){
+		$scope.animations = factAnimations.animations;
+	})
+
 
 	$scope.isAdmin = auth.isAdmin;
 	$scope.isLoggedIn = auth.isLoggedIn;
@@ -20,9 +24,6 @@ function($scope, $location, auth, factReservations) {
     });
 
 
-
-
-
 	//fonction de suppresion d'une réservation
 	$scope.deleteReservation = function(index_in_scope){
 		var reservation = $scope.reservations[index_in_scope];
@@ -36,10 +37,16 @@ function($scope, $location, auth, factReservations) {
 				factReservations.incrPlacesDispo(reservation.id_animation, reservation.nbPlaceReserve);
 			});
 		}
+	};
 
-		
-
-
+	$scope.showAlert = function(id_animation){
+		angular.forEach($scope.animations, function(value){
+			console.log(value._id + " " +id_animation);
+			if(!value._id === id_animation){
+				return true;
+			}
+		});
+		return false;
 	};
 
 	//modifier une reservation

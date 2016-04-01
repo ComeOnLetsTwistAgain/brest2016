@@ -6,17 +6,27 @@
 
   <h2>Liste des réservations</h2>
  
-
-<div class="row row_reservation" ng-repeat="r in reservations">
-    <div class="col-md-4">Libelle : {{r.libelle_animation}}</div>
-    <div class="col-md-4">Nombres de places : {{r.nbPlaceReserve}}</div>
-    <div class="col-md-4"><button class="btn btn-danger" ng-click="deleteReservation($index)">Annuler</button></div>
-
-    <div class="col-md-12 options" ng-repeat="o in r.optionss">
-      {{o.titre}}
+<div class="list-group">
+  <div class="row row_reservation list-group-item" ng-repeat="r in reservations">
+    <div ng-show="!r.animation" class="col-md-12 alert alert-danger">Cette animation a été supprimée. Nous vous invitons à annuler cette reservation.</div>
+    
+    <div class="col-md-12" style="margin-bottom:10px">
+      <div class="col-md-4">Libelle : {{r.animation.libelle}}</div>
+      <div class="col-md-4">Nombres de places : {{r.nbPlaceReserve}}</div>
+      <div class="col-md-4"><button class="btn btn-danger" ng-click="deleteReservation($index)">Annuler</button></div>
     </div>
-</div>
 
+
+      
+      <div class="col-md-12 options panel-heading">
+        Liste des options
+      </div>
+      <div class="col-md-12 options panel-body" ng-repeat="o in r.optionss">
+        {{o.titre}}
+      </div>
+      
+  </div>
+</div>
 
 
 <div ng-hide="isLoggedIn()">

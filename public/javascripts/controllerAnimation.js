@@ -44,7 +44,7 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 	});
 
 
-	if(window.DeviceOrientationEvent){
+	/*if(window.DeviceOrientationEvent){
     	MobileReader.bindOrientation({
 
 	      	callback: function(orientation) {
@@ -54,7 +54,7 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 	      	},
 	     	interval: 0
 	    });
-    }
+    }*/
 
 
 
@@ -109,10 +109,58 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 			
 		}
 	}
-
-	
 	//ajouter une animation
 	$scope.addAnimation = function(){
+		if ($scope.libelle === '') {
+			return;
+		}
+		var trouve = $filter('getAnimationsByTitle')($scope.animations, $scope.libelle);
+		if (trouve === null)
+		{
+			console.log("heure debut"+$scope.heureDebut);
+			console.log("heure fin "+$scope.heureFin);
+			if ($scope.heureDebut < $scope.heureFin)
+			{
+				//bon
+				console.log("heureDebut < heureFin");
+				factAnimations.create({
+			
+					libelle : $scope.libelle,
+					description : $scope.description,
+					nom_image : $scope.image.name,
+					place_dispo : $scope.place_max,
+					place_max  : $scope.place_max,
+					date : $scope.date,
+					heure_debut : $scope.heureDebut,
+					heure_fin : $scope.heureFin,
+					optionss : $scope.option_in_animation
+				}).success(function(){
+					//si l'animation est enregistré en base, on upload l'image
+					console.log($scope.image);
+					factAnimations.upload($scope.image);
+				});
+				// remet les champs à vides
+				$scope.libelle = '';
+				$scope.place_debut = '';
+				$scope.place_max  = '';
+				$scope.date = '';
+				$scope.heureDebut = '';
+				$scope.heureFin = '';
+				$scope.description = '';
+				$scope.error = '';
+			}else{
+				//pas bon
+				$scope.error = "L'heure de début est supérieure à l'heure de fin.";
+				return;
+			}
+			
+		}else{
+			$scope.error = "Il existe déjà une animation avec ce titre";
+		}
+	};
+	
+	//ajouter une animation
+	/*$scope.addAnimation = function(){
 
 		if ($scope.libelle === '') {
 			return;
@@ -164,15 +212,14 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 		}else{
 			$scope.error = "Il existe déjà une animation avec ce titre";
 		}
-	};
+	};*/
 
 	//ajouter une réservation
 	$scope.addReservation = function(){
 		
 
 		factReservations.create({
-			id_animation : $scope.animation._id,
-			libelle_animation : $scope.animation.libelle,
+			animation : $scope.animation._id,
 			user : $scope.user,
 			nbPlaceReserve : $scope.nbPlaceReserve,
 			optionss : $scope.option_in_reservation

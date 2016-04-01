@@ -9,6 +9,8 @@ var multer = require('multer');
 
 var app = require('../app');
 
+
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/img/uploads/')
@@ -40,7 +42,14 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 *   HOME
 */
 
+
 var returnRouter = function(io) {
+
+  router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
   router.get('/', function(req, res) {
     res.render('index');
@@ -313,7 +322,7 @@ var returnRouter = function(io) {
       
 
       res.json(reservations);
-    }).populate('optionss');
+    }).populate('optionss').populate('animation');
   });
 
 

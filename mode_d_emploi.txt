@@ -1,0 +1,40 @@
+## Mode d'emploi de l'application BREST2016 ##
+
+Prérequis windows : avoir un shell utilisable.
+
+Pour que le site soit accessible :
+	- il faut qu'un serveur MongoDB tourne en local.
+	- il faut qu'un serveur nodejs tourne en local.
+
+
+
+### MongoDB
+
+-- (windows)
+1. Télécharger et installer depuis le site : https://www.mongodb.org/downloads#production
+2. Créer l'arborescence de dossiers dans lesquels mongodb va gérer sa bdd :
+	C:\data\db
+3. Aller (avec un shell) dans C:\Program Files\MongoDB\Server\<version de mongodb>\bin
+4. exec : ./mongod
+
+> le serveur de bdd tourne.
+
+-- (Mac os)
+1. Installer mongodb comme service : brew install mongodb
+2. Créer l'arborescence de dossiers dans lesquels mongodb va gérer sa bdd :
+	/data/db
+3. exec : mongod
+
+### NodeJS
+
+-- (windows) & (mac os)
+1. Télécharger et installer nodejs depuis le site : https://nodejs.org/en/
+2. exec : npm install -g nodemon
+3. Se placer à la racine du projet
+4. exec : nodemon
+
+> le serveur node tourne.
+
+>> une fois tout cela fait. Se rendre sur l'URL : http://localhost:3000/
+
+

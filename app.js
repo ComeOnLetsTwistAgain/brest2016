@@ -11,6 +11,7 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+//var db_url = "mongodb://89.3.149.179/brest";
 var db_url = "mongodb://localhost/brest";
 //var db_url = "mongodb://sam:sam@ds054128.mongolab.com:54128/brest2016";
 
@@ -47,9 +48,6 @@ io.sockets.on('connection', function(socket){
     
 });
 
-io.sockets.on('devOrient', function(msg){
-    console.log('yo');
-});
 
 server.listen(3000);
 
@@ -76,6 +74,9 @@ app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
 
 
 // catch 404 and forward to error handler
