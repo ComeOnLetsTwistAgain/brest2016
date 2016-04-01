@@ -313,7 +313,7 @@ var returnRouter = function(io) {
       
 
       res.json(reservations);
-    }).populate('optionss');
+    }).populate('optionss').populate('animation');
   });
 
 

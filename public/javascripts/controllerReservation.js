@@ -5,6 +5,9 @@ function($scope, $location, auth, factReservations, factAnimations) {
 
 	//on récupère toutes les réservations présentes en base
 	$scope.reservations = factReservations.reservations;
+	factAnimations.getAll().success(function(){
+		$scope.animations = factAnimations.animations;
+	})
 
 
 	$scope.isAdmin = auth.isAdmin;
@@ -34,10 +37,16 @@ function($scope, $location, auth, factReservations, factAnimations) {
 				factReservations.incrPlacesDispo(reservation.id_animation, reservation.nbPlaceReserve);
 			});
 		}
+	};
 
-		
-
-
+	$scope.showAlert = function(id_animation){
+		angular.forEach($scope.animations, function(value){
+			console.log(value._id + " " +id_animation);
+			if(!value._id === id_animation){
+				return true;
+			}
+		});
+		return false;
 	};
 
 	//modifier une reservation

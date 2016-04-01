@@ -207,8 +207,7 @@ function($scope, $location, $filter, $state, auth, factAnimations, factOption, f
 		
 
 		factReservations.create({
-			id_animation : $scope.animation._id,
-			libelle_animation : $scope.animation.libelle,
+			animation : $scope.animation._id,
 			user : $scope.user,
 			nbPlaceReserve : $scope.nbPlaceReserve,
 			optionss : $scope.option_in_reservation
