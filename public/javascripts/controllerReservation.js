@@ -34,7 +34,7 @@ function($scope, $location, auth, factReservations, factAnimations) {
 		    factReservations.delete(reservation._id).success(function(){
 				$scope.reservations.splice(index_in_scope, 1);
 
-				factReservations.incrPlacesDispo(reservation.id_animation, reservation.nbPlaceReserve);
+				factReservations.incrPlacesDispo(reservation.animation._id, reservation.nbPlaceReserve);
 			});
 		}
 	};
