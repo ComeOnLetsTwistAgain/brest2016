@@ -10,7 +10,6 @@ var multer = require('multer');
 var app = require('../app');
 
 
-
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/img/uploads/')
@@ -28,7 +27,7 @@ var upload_img_anim = multer({
 
 
 
-var option_model = mongoose.model('Option'); 
+var option_model = mongoose.model('Option');
 var Animation = mongoose.model('Animation');
 
 var User = mongoose.model('User');
@@ -151,8 +150,8 @@ var returnRouter = function(io) {
 
   // #######################################################
 
-  /* 
-  * ANIMATIONS 
+  /*
+  * ANIMATIONS
   */
 
   // paramètre pour animation
@@ -170,9 +169,9 @@ var returnRouter = function(io) {
 
   // route pour l'ensemble des animations
   router.get('/animations', function(req, res, next) {
-    
+
     Animation.find(function(err, animations){
-      if(err){ 
+      if(err){
         return next(err);
       }
 
@@ -207,10 +206,10 @@ var returnRouter = function(io) {
 
   router.get('/animations/:id/edit', function(req, res, next) {
     Animation.findById(req.params.id, function(err, animation) {
-      if(err) { 
+      if(err) {
         return next(err);
       }
-      if(!animation) { 
+      if(!animation) {
         console.log("404 - /animations/:id/edit");
         return res.send(404);
       }
@@ -220,10 +219,10 @@ var returnRouter = function(io) {
 
   router.get('/animations/:id', function(req, res, next) {
     Animation.findById(req.params.id, function(err, animation) {
-      if(err) { 
+      if(err) {
         return next(err);
       }
-      if(!animation) { 
+      if(!animation) {
         console.log("404 - /animations/:id/edit");
         return res.send(404);
       }
@@ -241,7 +240,7 @@ var returnRouter = function(io) {
         res.json(animation);
         io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
       }, req.body.infos.nbPlaces);
-      
+
     });
   });
 
@@ -255,17 +254,17 @@ var returnRouter = function(io) {
         res.json(animation);
         io.sockets.emit('client_call_animations', 'nouvelle animation ajoutée');
       }, req.body.infos.nbPlaces);
-      
+
     });
   });
 
 
 
   router.put('/animations/:id', function(req, res, next) {
-    
-    
+
+
     Animation.findById(req.params.id, function(err, animation) {
-      
+
       animation.libelle = req.body.animation.libelle;
       animation.description = req.body.animation.description;
       animation.nom_image = req.body.animation.nom_image;
@@ -286,7 +285,7 @@ var returnRouter = function(io) {
 
   // #######################################################
 
-  /* 
+  /*
   * RESERVATION
   */
 
@@ -306,7 +305,7 @@ var returnRouter = function(io) {
   // route pour l'ensemble des réservations
   router.get('/reservations', function(req, res, next) {
     Reservation.find(function(err, reservations){
-      if(err){ 
+      if(err){
         return next(err);
       }
 
@@ -316,17 +315,17 @@ var returnRouter = function(io) {
 
   router.get('/mes_reservations/:user', auth, function(req, res, next){
     Reservation.find({'user': req.params.user}, function(err, reservations){
-      if(err){ return next(err); } 
+      if(err){ return next(err); }
 
       //call socket
-      
+
 
       res.json(reservations);
     }).populate('optionss').populate('animation');
   });
 
 
-  // route pour la création d'une réservation 
+  // route pour la création d'une réservation
   router.post('/reservations', auth, function(req, res, next) {
     var reservation = new Reservation(req.body);
 
@@ -353,13 +352,13 @@ var returnRouter = function(io) {
 
   // #######################################################
 
-  /* 
+  /*
   * OPTION
   */
 
   // parametre option
   router.param('option', function(req, res, next, id) {
-    var query = option_model.findById(id);  
+    var query = option_model.findById(id);
 
     query.exec(function (err, option){
       if (err) { return next(err); }
@@ -372,8 +371,8 @@ var returnRouter = function(io) {
 
   // route pour l'ensemble des options
   router.get('/options', function(req, res, next) {
-    option_model.find(function(err, options){ 
-      if(err){ 
+    option_model.find(function(err, options){
+      if(err){
         return next(err);
       }
 
@@ -385,21 +384,21 @@ var returnRouter = function(io) {
     option_model.findById(req.params.id, function(err, option) {
       if(err) { return next(err);}
       if(!option) { return res.send(404);}
-     
+
       return res.json(option);
     });
   });
 
   // route pour la création des options
   router.post('/options', auth, function(req, res, next) {
-    var option = new option_model(req.body); 
+    var option = new option_model(req.body);
 
     option.save(function(err, option){
       if(err){ return next(err); }
 
       res.json(option);
     });
-  }); 
+  });
 
   router.delete('/options/:id/remove', function(req, res, next) {
     option_model.findById(req.params.id, function(err, option) {
@@ -415,13 +414,13 @@ var returnRouter = function(io) {
 
   // #######################################################
 
-  /* 
+  /*
   * BILLET
   */
 
   // parametre billet
   router.param('billet', function(req, res, next, id) {
-    var query = Billet.findById(id);  
+    var query = Billet.findById(id);
 
     query.exec(function (err, billet){
       if (err) { return next(err); }
@@ -434,8 +433,8 @@ var returnRouter = function(io) {
 
   // route pour l'ensemble des billets
   router.get('/billets', function(req, res, next) {
-    Billet.find(function(err, billets){ 
-      if(err){ 
+    Billet.find(function(err, billets){
+      if(err){
         return next(err);
       }
 
@@ -447,7 +446,7 @@ var returnRouter = function(io) {
     Billet.findById(req.params.id, function(err, billet) {
       if(err) { return next(err);}
       if(!billet) { return res.send(404);}
-     
+
       return res.json(billet);
     });
   });
@@ -455,14 +454,14 @@ var returnRouter = function(io) {
   // route pour la création des billets
   router.post('/billets', auth, function(req, res, next) {
   //router.post('/billets', function(req, res, next) {  // pour insérer en base des données sans Auth
-    var billet = new Billet(req.body); 
+    var billet = new Billet(req.body);
 
     billet.save(function(err, billet){
       if(err){ return next(err); }
 
       res.json(billet);
     });
-  }); 
+  });
 
   router.delete('/billets/:id/remove', function(req, res, next) {
     Billet.findById(req.params.id, function(err, billet) {

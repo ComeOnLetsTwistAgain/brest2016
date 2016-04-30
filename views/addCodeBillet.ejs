@@ -5,7 +5,7 @@
 <div class="col-md-6">
 	<h2>Codes disponibles</h2>
 	<div ng-repeat="o in codes" class="row option_row">
-  		<div class="col-md-3 ng-binding text-center" style="line-height: 30px;">{{o.code_billet}}</div> 
+  		<div class="col-md-3 ng-binding text-center" style="line-height: 30px;">{{o.code_billet}}</div>
   		<div class="col-md-6 ng-binding text-center" style="line-height: 30px;" ng-show="o.is_used">  <span class="glyphicon glyphicon-ok"></span></div>
   		<div class="col-md-6 ng-binding text-center"  ng-show="!o.is_used"> <span style="line-height: 30px;" class="glyphicon glyphicon-remove"></span></div>
         <div class="col-md-3"><a class="btn-suppr" href="#" ng-click="deleteOption($index)">Supprimer <span class="glyphicon glyphicon-trash"></span></a></div>
@@ -13,7 +13,7 @@
 </div>
 <div class="col-md-6">
 	<h2>Ajouter un code billet </h2>
-	
+
 	<form ng-submit="addCodeBillet()" style="margin-top:30px;">
 
 		<div class="form-group">
